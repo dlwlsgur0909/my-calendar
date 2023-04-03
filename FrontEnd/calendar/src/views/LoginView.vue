@@ -14,12 +14,10 @@
                 <button id="login-button">로그인</button>
             </div>
             <div class="login-form-buttons">
-                <span id="join-button">회원가입</span> |
+                <router-link to="/signup"><span id="join-button">회원가입</span></router-link> |
                 <span id="find-id-pw-button">아이디/비밀번호 찾기</span>
             </div>
         </div>
-
-
     </div>
 </template>
 <script>
@@ -31,6 +29,7 @@ export default {
 
 input {
     border: none;
+    border-radius: 5px;
 }
 .login-form {
     display: flex;
@@ -64,6 +63,7 @@ input {
     height: 18%;
     background: white;
     padding-left: 5px;
+    border-radius: 5px;
 }
 
 #login-password {
