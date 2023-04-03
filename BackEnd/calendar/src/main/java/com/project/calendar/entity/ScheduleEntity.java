@@ -26,8 +26,11 @@ public class ScheduleEntity {
     @Column(name = "schedule_create")
     private String scheduleCreate;
 
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private String userId;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
 
