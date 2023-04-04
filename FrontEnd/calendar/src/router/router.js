@@ -25,6 +25,15 @@ const routes = [
         component: IndexView
     },
     {
+        path: '/logout',
+        name: 'logout',
+        beforeEnter: () => {
+            window.sessionStorage.clear();
+            window.location.href = "/login";
+        }
+        
+    },
+    {
         path: '/users',
         name: 'users'
     }

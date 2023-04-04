@@ -2,7 +2,8 @@
     <div class="header">
         <div v-if="loginStatus">
             <router-link to="/index">Index</router-link> |  
-            <router-link to="/users">My Profile</router-link>
+            <router-link to="/users">My Profile</router-link> |
+            <router-link to="/logout">Logout</router-link>
         </div>
         <div class="before-login-header" v-else>
             <h1 @click="onClickLogo">Welcom to My Calendar</h1>
