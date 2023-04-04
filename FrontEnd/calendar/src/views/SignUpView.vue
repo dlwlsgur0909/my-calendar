@@ -55,6 +55,7 @@ export default {
                 userPassword: this.password
             };
 
+            // 회원가입 fetch
             fetchSignUp(user)
             .then(res => res.json())
             .then(res => {
@@ -116,6 +117,13 @@ input {
     border-radius: 5px;
     margin-top: 2vh;
     margin-bottom: 2vh;
+}
+
+#signup-username input,
+#signup-name input,
+#signup-password input,
+#signup-repassword input {
+    margin-left: 15px;
 }
 
 

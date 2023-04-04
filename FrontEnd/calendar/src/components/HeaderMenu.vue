@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <router-link to="/">Index</router-link> |  
+        <router-link to="/index">Index</router-link> |  
         <router-link to="/users">My Profile</router-link>
     </div>
 </template>

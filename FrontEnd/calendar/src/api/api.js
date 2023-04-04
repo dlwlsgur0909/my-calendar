@@ -19,8 +19,8 @@ function fetchSignUp(user) {
 function fetchLogin(user) {
     return fetch(`${config.baseUrl}/login`, {
         method: 'POST',
-        header: {
-            'Content-Type': 'application/json'
+        headers: {
+            'content-type': 'application/json',
         },
         body: JSON.stringify(user)
     })

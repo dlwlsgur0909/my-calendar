@@ -8,14 +8,14 @@
             </div>
             <div id="login-password">
                 Password:
-                <input type="text" placeholder="비밀번호를 입력하세요" size="20" v-model="this.password">
+                <input type="password" placeholder="비밀번호를 입력하세요" size="20" v-model="this.password">
             </div>
             <div>
                 <button id="login-button" @click="onClickLogin">로그인</button>
             </div>
             <div class="login-form-buttons">
-                <router-link to="/signup"><span id="join-button">회원가입</span></router-link> |
-                <span id="find-id-pw-button">아이디/비밀번호 찾기</span>
+                <router-link to="/signup"><span id="join-button">회원가입</span></router-link> 
+                <!-- | <span id="find-id-pw-button">아이디/비밀번호 찾기</span> -->
             </div>
         </div>
     </div>
@@ -44,14 +44,15 @@ export default {
 
 
             const user = {
-                username: this.username,
-                password: this.password,
+                userUsername: this.username,
+                userPassword: this.password,
             };
 
-            // 로그인 로직 필요
+
+            // 로그인 fetch
             fetchLogin(user)
-            .then()
-            .then()
+            .then(res => res.json())
+            .then(res => console.log(res))
         }
     }
     
@@ -96,6 +97,12 @@ input {
     background: white;
     padding-left: 5px;
     border-radius: 5px;
+    line-height: 200%;
+}
+
+#login-username input,
+#login-password input {
+    margin-left: 15px;
 }
 
 #login-password {
