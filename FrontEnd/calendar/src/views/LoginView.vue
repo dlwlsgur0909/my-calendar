@@ -4,11 +4,11 @@
         <div class="login-input">
             <div id="login-username">
                 Username: 
-                <input type="text" placeholder="아이디를 입력하세요" size="20" v-model="this.username">
+                <input type="text" placeholder="아이디" size="15" v-model="this.username">
             </div>
             <div id="login-password">
                 Password:
-                <input type="password" placeholder="비밀번호를 입력하세요" size="20" v-model="this.password">
+                <input type="password" placeholder="비밀번호" size="17" v-model="this.password">
             </div>
             <div>
                 <button id="login-button" @click="onClickLogin">로그인</button>
@@ -52,7 +52,21 @@ export default {
             // 로그인 fetch
             fetchLogin(user)
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => {
+                if(res.errorMessage) {
+                    alert(res.errorMessage);
+                    return;
+                }else {
+                    console.log(res);
+                    window.sessionStorage.setItem('username', res.userUsername);
+                    window.sessionStorage.setItem('userName', res.userName);
+                    window.sessionStorage.setItem('regdate', res.userRegdate);
+
+                    window.location.href = '/index';
+                }
+
+                
+            })
         }
     }
     
@@ -85,14 +99,15 @@ input {
 }
 
 .login-input {
-    width: 60%;
+    width: 250px;
     height: 40%;
 }
 
 #login-username,
 #login-password {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    width: 100%;
     height: 18%;
     background: white;
     padding-left: 5px;
@@ -103,6 +118,13 @@ input {
 #login-username input,
 #login-password input {
     margin-left: 15px;
+    text-align: center;
+}
+
+#login-username input::placeholder,
+#login-password input::placeholder {
+    text-align: center;
+    color: rgb(252, 110, 110);
 }
 
 #login-password {

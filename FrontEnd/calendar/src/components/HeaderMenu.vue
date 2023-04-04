@@ -13,6 +13,7 @@ export default {
 
 <style scopde>
 .header {
+    box-sizing: border-box;
     height: 10vh;
     display: flex;
     border: 1px solid black;
