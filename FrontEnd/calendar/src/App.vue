@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <header-menu></header-menu>
+    <!-- {{loginStatus}} -->
     <router-view></router-view>
   </div>
 </template>
@@ -13,6 +14,12 @@ export default {
   name: 'App',
   components: {
     HeaderMenu,
+  },
+  computed: {
+    loginStatus() {
+      console.log(this.$store.state.loginStatus);
+      return this.$store.state.loginStatus;
+    }
   }
 }
 </script>
