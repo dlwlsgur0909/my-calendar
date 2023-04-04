@@ -1,0 +1,23 @@
+<template>
+    <div class="header">
+        <router-link to="/">Index</router-link> |  
+        <router-link to="/users">My Profile</router-link>
+    </div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scopde>
+.header {
+    height: 10vh;
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+}
+    
+</style>
