@@ -1,32 +1,29 @@
 <template>
     <div class="signup-form">
-        <h2>Welcome to My Calendar</h2>
-        <div class="signup-input">
+        <h2>Sign Up Here!</h2>
             <div id="signup-username">
                 Username: 
-                <input type="text" placeholder="아이디를 입력하세요" size="20" v-model="this.username">
+                <input type="text" placeholder="아이디" size="15" v-model="this.username">
             </div>
             <div id="signup-name">
                 Name: 
-                <input type="text" placeholder="이름을 입력하세요" size="20" v-model="this.name">
+                <input type="text" placeholder="이름" size="15" v-model="this.name">
             </div>
             <div id="signup-password">
                 Password:
-                <input type="password" placeholder="비밀번호를 입력하세요" size="20" v-model="this.password">
+                <input type="password" placeholder="비밀번호" size="15" v-model="this.password">
             </div>
             <div id="signup-repassword">
                 Re-Password:
-                <input type="password" placeholder="비밀번호 확인" size="20" v-model="this.rePassword">
+                <input type="password" placeholder="비밀번호 확인" size="15" v-model="this.rePassword">
             </div>
             <div>
                 <button id="signup-button" @click="onClickSignUp">회원가입</button>
             </div>
-        </div>
     </div>
 </template>
-<script>
 
-import { fetchSignUp } from '../api/api.js';
+<script>
 
 export default {
     data() {
@@ -56,23 +53,14 @@ export default {
             };
 
             // 회원가입 fetch
-            fetchSignUp(user)
-            .then(res => res.json())
-            .then(res => {
-                if(res.errorMessage) {
-                    alert(res.errorMessage);
-                    return;
-                }else {
-                    alert("회원가입을 완료했습니다. 로그인 해주세요");
-                    window.location.href = "/login";
-                }
-            })
+            this.$store.dispatch('FETCH_SIGNUP', user);
         },
 
     }
     
 }
 </script>
+
 <style scoped>
 
 input {
@@ -99,36 +87,55 @@ input {
     width: 100%;
 }
 
-.signup-input {
-    width: 70%;
-    height: 35%;
-    margin-top: 10%;
-}
-
 #signup-username,
 #signup-name,
 #signup-password,
 #signup-repassword {
-    display: flex;
-    justify-content: space-between;
+    width: 250px;
     height: 18%;
     background: white;
     padding-left: 20px;
     border-radius: 5px;
     margin-top: 2vh;
     margin-bottom: 2vh;
+    line-height: 200%;
 }
 
 #signup-username input,
 #signup-name input,
 #signup-password input,
 #signup-repassword input {
-    margin-left: 15px;
+    text-align: center;
+}
+
+#signup-username input {
+    margin-left: 13%;
+}
+
+#signup-name input {
+    margin-left: 24%;
+}
+
+#signup-password input {
+    margin-left: 16%;
+}
+
+#signup-repassword input {
+    margin-left: 5%;
+}
+
+
+#signup-username input::placeholder,
+#signup-name input::placeholder,
+#signup-password input::placeholder,
+#signup-repassword input::placeholder {
+    color: rgb(252, 110, 110);
+    text-align: center;
 }
 
 
 #signup-button {
-    width: 100%;
+    width: 250px;
     height: 25px;
     margin-top: 20px;
     margin-bottom: 20px;

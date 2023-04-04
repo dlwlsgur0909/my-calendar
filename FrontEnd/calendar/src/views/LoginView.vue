@@ -1,6 +1,6 @@
 <template>
     <div class="login-form">
-        <h2>Welcome to My Calendar</h2>
+        <h2>Login</h2>
         <div class="login-input">
             <div id="login-username">
                 Username: 
@@ -20,15 +20,9 @@
         </div>
     </div>
 </template>
+
 <script>
-
-import { fetchLogin } from '../api/api.js';
-
-
 export default {
-    
-
-
     data() {
         return {
             username: '',
@@ -41,37 +35,19 @@ export default {
                 alert("아이디와 비밀번호를 다시 확인해주세요")
                 return;
             }
-
-
             const user = {
                 userUsername: this.username,
                 userPassword: this.password,
             };
 
 
-            // 로그인 fetch
-            fetchLogin(user)
-            .then(res => res.json())
-            .then(res => {
-                if(res.errorMessage) {
-                    alert(res.errorMessage);
-                    return;
-                }else {
-                    console.log(res);
-                    window.sessionStorage.setItem('username', res.userUsername);
-                    window.sessionStorage.setItem('userName', res.userName);
-                    window.sessionStorage.setItem('regdate', res.userRegdate);
-
-                    window.location.href = '/index';
-                }
-
-                
-            })
+            this.$store.dispatch('FETCH_LOGIN', user);
         }
     }
     
 }
 </script>
+
 <style scoped>
 
 input {
@@ -105,8 +81,6 @@ input {
 
 #login-username,
 #login-password {
-    /* display: flex; */
-    /* justify-content: space-between; */
     width: 100%;
     height: 18%;
     background: white;
