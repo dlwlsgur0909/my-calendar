@@ -26,7 +26,7 @@
 </template>
 <script>
 
-import {fetchSignUp} from '../api/api.js';
+import { fetchSignUp } from '../api/api.js';
 
 export default {
     data() {
@@ -50,16 +50,22 @@ export default {
             }
 
             const user = {
-                username: this.username,
-                name: this.name,
-                password: this.password
+               userUsername: this.username,
+                userName: this.name,
+                userPassword: this.password
             };
 
             fetchSignUp(user)
-            .then(res => console.log(res))
-
-
-
+            .then(res => res.json())
+            .then(res => {
+                if(res.errorMessage) {
+                    alert(res.errorMessage);
+                    return;
+                }else {
+                    alert("회원가입을 완료했습니다. 로그인 해주세요");
+                    window.location.href = "/login";
+                }
+            })
         },
 
     }
