@@ -1,6 +1,7 @@
 package com.project.calendar.dto.request;
 
 import com.project.calendar.entity.UserEntity;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter @ToString
@@ -10,10 +11,13 @@ import lombok.*;
 @Builder
 public class UserSignUpRequestDTO {
 
+    @NotBlank
     private String userUsername;
 
+    @NotBlank
     private String userPassword;
 
+    @NotBlank
     private String userName;
 
     public UserEntity toEntity() {

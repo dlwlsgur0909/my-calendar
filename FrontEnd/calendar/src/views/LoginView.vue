@@ -4,14 +4,14 @@
         <div class="login-input">
             <div id="login-username">
                 Username: 
-                <input type="text" placeholder="아이디를 입력하세요" size="20" >
+                <input type="text" placeholder="아이디를 입력하세요" size="20" v-model="this.username">
             </div>
             <div id="login-password">
                 Password:
-                <input type="text" placeholder="비밀번호를 입력하세요" size="20">
+                <input type="text" placeholder="비밀번호를 입력하세요" size="20" v-model="this.password">
             </div>
             <div>
-                <button id="login-button">로그인</button>
+                <button id="login-button" @click="onClickLogin">로그인</button>
             </div>
             <div class="login-form-buttons">
                 <router-link to="/signup"><span id="join-button">회원가입</span></router-link> |
@@ -21,7 +21,39 @@
     </div>
 </template>
 <script>
+
+import { fetchLogin } from '../api/api.js';
+
+
 export default {
+    
+
+
+    data() {
+        return {
+            username: '',
+            password: '',
+        }
+    },
+    methods: {
+        onClickLogin() {
+            if(this.username.trim() === '' || this.password.trim() === '') {
+                alert("아이디와 비밀번호를 다시 확인해주세요")
+                return;
+            }
+
+
+            const user = {
+                username: this.username,
+                password: this.password,
+            };
+
+            // 로그인 로직 필요
+            fetchLogin(user)
+            .then()
+            .then()
+        }
+    }
     
 }
 </script>

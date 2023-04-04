@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ExceptionEnum {
 
+    INSUFFICIENT_INFORMATION(HttpStatus.BAD_REQUEST, "400", "Insufficient Information"),
     USER_NOT_EXIST(HttpStatus.BAD_REQUEST, "400", "User Does Not Exist with given Username"),
     WRONG_PASSWORD(HttpStatus.BAD_REQUEST, "400", "Invalid Password"),
     DUPLICATE_USERNAME(HttpStatus.BAD_REQUEST, "400", "Username Already Exists"),
