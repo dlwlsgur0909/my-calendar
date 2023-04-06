@@ -1,6 +1,38 @@
 export default {
-    // SET_LOGINSTATUS(state, status) {
-    //     state.loginStatus = status;
-    // },
-    // SET_TOTALDAYS
+
+    SET_CALENDAR(state, obj) {
+        const beforeArr = [];
+
+        for(let i=0; i<7; i++) {
+            if(obj.beforeObj.beforeStart <= obj.beforeObj.beforeEnd) {
+                beforeArr.push(obj.beforeObj.beforeStart);
+                obj.beforeObj.beforeStart++;
+            }else {
+                beforeArr.push(obj.currentObj.firstDate);
+                obj.currentObj.firstDate++;
+            }
+        }
+
+        state.calendar.push(beforeArr);
+
+        for(let i=1; i<6; i++) {
+            
+            const dataArr = [];
+
+            for(let j=0; j<7; j++) {
+                if(obj.currentObj.firstDate <= obj.currentObj.lastDate) {
+                    dataArr.push(obj.currentObj.firstDate);
+                    obj.currentObj.firstDate++;
+                }else {
+                    if(obj.afterObj.afterStart <= obj.afterObj.afterEnd) {
+                        dataArr.push(obj.afterObj.afterStart);
+                        obj.afterObj.afterStart++;
+                    }
+                }
+            }
+            state.calendar.push(dataArr);
+        }
+    }
+
+
 }
