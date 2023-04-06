@@ -8,7 +8,6 @@ import {
 import router from '../router/router.js';
 
 export default {
-
     
     FETCH_SIGNUP(context, user) {
         fetchSignUp(user)
@@ -41,5 +40,11 @@ export default {
         })
         .catch(error => console.log(error))
     },
+
+    // 해당 년, 월의 총 일 수를 구하는 함수
+    // CalculateTotalDays(context, year, month) {
+    //     totalDays = new Date(year, month, 0).getDate();
+    //     context.commit('SET_TOTALDAYS', totalDays);
+    // }
 
 }

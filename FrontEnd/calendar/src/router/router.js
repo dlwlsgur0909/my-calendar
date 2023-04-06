@@ -4,6 +4,8 @@ import LoginView from '../views/LoginView.vue';
 import SignUpView from '../views/SignUpView.vue';
 
 
+/* eslint-disable */
+
 const routes = [
     {
         path: '/',
@@ -22,7 +24,10 @@ const routes = [
     {
         path: '/index',
         name: 'index',
-        component: IndexView
+        component: IndexView,
+        // beforeEnter: (to, from, next) => {
+
+        // }
     },
     {
         path: '/logout',

@@ -1,6 +1,6 @@
 <template>
     <div class="login-form">
-        <h2>Login</h2>
+        <h2>LOGIN</h2>
         <div class="login-input">
             <div id="login-username">
                 Username: 

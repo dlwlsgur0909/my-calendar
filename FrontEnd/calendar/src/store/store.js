@@ -8,7 +8,15 @@ export const store = createStore({
         loginStatus: window.sessionStorage.getItem('username') !== null ? true : false,
         username: window.sessionStorage.getItem('username'),
         name: window.sessionStorage.getItem('name'),
-        regdate: window.sessionStorage.getItem('regdate')
+        regdate: window.sessionStorage.getItem('regdate'),
+        // calender: [],
+        // today: new Date().toLocaleDateString(),
+        // year: new Date().getFullYear(),
+        // month: new Date().getMonth()+1,
+        // date: new Date().getDate(),
+        // day: new Date().getDay(),
+        // totalDays: 30,
+
     },
     mutations, 
     actions,
