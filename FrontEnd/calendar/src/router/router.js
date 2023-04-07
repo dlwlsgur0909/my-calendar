@@ -27,47 +27,14 @@ const routes = [
         name: 'index',
         component: IndexView,
         beforeEnter: (to, from, next) => {
-            // 선택 날짜 정보
-            let year = store.state.year;
-            let month = store.state.month;
-            let firstDay = new Date(year, month).getDay();
-            let firstDate = new Date(year, month, 1);
-            let lastDate = new Date(year, month+1, 0).getDate();
-
-            // 전월 정보
-            let before = new Date(firstDate.setDate(firstDate.getDate()-firstDay));
-            let beforeYear = before.getFullYear();
-            let beforeMonth = before.getMonth();
-            let beforeStart = before.getDate();
-            let beforeEnd = new Date(beforeYear, beforeMonth+1, 0).getDate();
             
-            // 다음 달 정보
-            let afterYear = month === 11 ? year + 1 : year;
-            let afterMonth = month + 1
-            let afterStart = 1;
-            let afterEnd = 42 - (lastDate + (beforeEnd - beforeStart) + 1);
+            // 선택 날짜 정보
+            const dateInfo = {
+                year: store.state.year,
+                month: store.state.month
+            }
 
-            const obj = {
-                beforeObj: {
-                    beforeYear: beforeYear,
-                    beforeMonth: beforeMonth,
-                    beforeStart: beforeStart,
-                    beforeEnd: beforeEnd
-                },
-                afterObj: {
-                    afterYear: afterYear,
-                    afterMonth: afterMonth,
-                    afterStart: afterStart,
-                    afterEnd: afterEnd
-                },
-                currentObj: {
-                    firstDate: 1,
-                    lastDate: lastDate
-                }
-            };
-
-
-            store.commit('SET_CALENDAR', obj);
+            store.dispatch('CREATE_CALENDAR', dateInfo);
             next();
 
         }
