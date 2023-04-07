@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="calendar-header">
+            <button class="today-button" @click="onClickToday">TODAY</button>
             <span class="prev-month" @click="onClickPrevMonth">&leftarrow;</span>
             {{ currentYear }} {{ currentMonth+1 }}
             <span class="next-month" @click="onClickNextMonth">&rightarrow;</span>
@@ -72,6 +73,21 @@ export default {
             };
 
             this.$store.dispatch('CREATE_CALENDAR', dateInfo);
+        },
+        onClickToday() {
+            const thisYear = new Date().getFullYear();
+            const thisMonth = new Date().getMonth();
+
+            this.currentYear = thisYear;
+            this.$store.dispatch('CHANGE_YEAR', thisYear);
+            this.currentMonth = thisMonth;
+            this.$store.dispatch('CHANGE_MONTH', thisMonth);
+
+            const dateInfo =  {
+                year: thisYear,
+                month: thisMonth
+            }
+            this.$store.dispatch('CREATE_CALENDAR', dateInfo);
         }
     }
     
@@ -83,6 +99,23 @@ export default {
 .calendar-header {
     text-align: center;
     font-size: 50px;
+    height: 10vh;
+}
+
+.today-button {
+    position: relative;
+    padding: 5px 10px;
+    left: -3%;
+    top: -10%;
+    background: rgb(54, 230, 157);
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    font-weight: 600;
+}
+
+.today-button:hover {
+    color: #ffffff;
 }
 
 .prev-month:hover,
@@ -90,6 +123,7 @@ export default {
     cursor: pointer;
     color: rgb(54, 230, 157);
 }
+
 
 .calendar-column {
     display: flex;
