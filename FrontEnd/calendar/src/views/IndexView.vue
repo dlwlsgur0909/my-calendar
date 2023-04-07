@@ -47,6 +47,13 @@ export default {
             }
 
             this.$store.dispatch('CHANGE_MONTH', this.currentMonth);
+
+            const dateInfo = {
+                year: this.currentYear,
+                month: this.currentMonth
+            };
+
+            this.$store.dispatch('CREATE_CALENDAR', dateInfo);
         },
         onClickNextMonth() {
 
@@ -58,6 +65,13 @@ export default {
             }
 
             this.$store.dispatch('CHANGE_MONTH', this.currentMonth);
+
+            const dateInfo = {
+                year: this.currentYear,
+                month: this.currentMonth
+            };
+
+            this.$store.dispatch('CREATE_CALENDAR', dateInfo);
         }
     }
     

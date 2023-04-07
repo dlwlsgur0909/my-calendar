@@ -1,17 +1,31 @@
 export default {
 
     SET_CALENDAR(state, obj) {
+
+        state.calendar = [];
+
         const beforeArr = [];
 
-        for(let i=0; i<7; i++) {
-            if(obj.beforeObj.beforeStart <= obj.beforeObj.beforeEnd) {
-                beforeArr.push(obj.beforeObj.beforeStart);
-                obj.beforeObj.beforeStart++;
-            }else {
+        if(obj.currentObj.isFirstZero) {
+            for(let i=0; i<7; i++) {
                 beforeArr.push(obj.currentObj.firstDate);
                 obj.currentObj.firstDate++;
             }
+
+        }else {
+            for(let i=0; i<7; i++) {
+                if(obj.beforeObj.beforeStart <= obj.beforeObj.beforeEnd) {
+                    beforeArr.push(obj.beforeObj.beforeStart);
+                    obj.beforeObj.beforeStart++;
+                }else {
+                    beforeArr.push(obj.currentObj.firstDate);
+                    obj.currentObj.firstDate++;
+                }
+            }
         }
+        
+
+
 
         state.calendar.push(beforeArr);
 
@@ -37,7 +51,7 @@ export default {
     SET_MONTH(state, month) {
         state.month = month;
     },
-    
+
     SET_YEAR(state, year) {
         state.year = year;
     }
