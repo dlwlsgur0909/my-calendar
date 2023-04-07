@@ -30,8 +30,6 @@ const routes = [
             // 선택 날짜 정보
             let year = store.state.year;
             let month = store.state.month;
-            let date = store.state.date;
-            let day = store.state.day
             let firstDay = new Date(year, month).getDay();
             let firstDate = new Date(year, month, 1);
             let lastDate = new Date(year, month+1, 0).getDate();

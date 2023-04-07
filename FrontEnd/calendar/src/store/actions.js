@@ -41,6 +41,18 @@ export default {
         .catch(error => console.log(error))
     },
 
+    CHANGE_MONTH(context, month) {
+        context.commit('SET_MONTH', month);
+    },
+
+    CHANGE_YEAR(context, year) {
+        context.commit('SET_YEAR', year);
+    },
+
+    CREATE_CALENDAR(context) {
+
+    }
+
     // 해당 년, 월의 총 일 수를 구하는 함수
     // CalculateTotalDays(context, year, month) {
     //     totalDays = new Date(year, month, 0).getDate();

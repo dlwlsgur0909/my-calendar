@@ -32,6 +32,14 @@ export default {
             }
             state.calendar.push(dataArr);
         }
+    },
+
+    SET_MONTH(state, month) {
+        state.month = month;
+    },
+    
+    SET_YEAR(state, year) {
+        state.year = year;
     }
 
 
