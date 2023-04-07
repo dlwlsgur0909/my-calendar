@@ -28,7 +28,7 @@ const routes = [
         component: IndexView,
         beforeEnter: (to, from, next) => {
             
-            // 선택 날짜 정보
+            // 오늘 날짜 정보
             const dateInfo = {
                 year: store.state.year,
                 month: store.state.month

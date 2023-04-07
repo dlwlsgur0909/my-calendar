@@ -6,26 +6,49 @@ export default {
 
         const beforeArr = [];
 
+        // 월의 첫날이 일요일인지 확인
         if(obj.currentObj.isFirstZero) {
+
             for(let i=0; i<7; i++) {
-                beforeArr.push(obj.currentObj.firstDate);
+
+                const data = {
+                    date: '',
+                    isCurrent: '',
+                };
+
+                data.date = obj.currentObj.firstDate;
+                data.isCurrent = true;
+
+                beforeArr.push(data);
                 obj.currentObj.firstDate++;
             }
 
         }else {
             for(let i=0; i<7; i++) {
+
+                const data = {
+                    date: '',
+                    isCurrent: '',
+                };
+
                 if(obj.beforeObj.beforeStart <= obj.beforeObj.beforeEnd) {
-                    beforeArr.push(obj.beforeObj.beforeStart);
+
+                    data.date = obj.beforeObj.beforeStart;
+                    data.isCurrent = false;
+
                     obj.beforeObj.beforeStart++;
                 }else {
-                    beforeArr.push(obj.currentObj.firstDate);
+
+                    data.date = obj.currentObj.firstDate;
+                    data.isCurrent = true;
+
                     obj.currentObj.firstDate++;
                 }
+                beforeArr.push(data);
+
             }
         }
         
-
-
 
         state.calendar.push(beforeArr);
 
@@ -34,15 +57,24 @@ export default {
             const dataArr = [];
 
             for(let j=0; j<7; j++) {
+
+                const data = {
+                    date: '',
+                    isCurrent: ''
+                };
+
                 if(obj.currentObj.firstDate <= obj.currentObj.lastDate) {
-                    dataArr.push(obj.currentObj.firstDate);
+                    data.date = obj.currentObj.firstDate
+                    data.isCurrent = true;
                     obj.currentObj.firstDate++;
                 }else {
                     if(obj.afterObj.afterStart <= obj.afterObj.afterEnd) {
-                        dataArr.push(obj.afterObj.afterStart);
+                        data.date = obj.afterObj.afterStart;
+                        data.isCurrent = false;
                         obj.afterObj.afterStart++;
                     }
                 }
+                dataArr.push(data);
             }
             state.calendar.push(dataArr);
         }

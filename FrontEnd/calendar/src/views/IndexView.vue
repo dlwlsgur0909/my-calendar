@@ -16,8 +16,9 @@
             <div class="calendar-column-text">토</div>
         </div>
         <div v-for="(rowData, rowIndex) in calendar" class="calendar-row" :key="rowIndex">
-            <div v-for="(cellData, cellIndex) in rowData" :key="cellIndex" class="calendar-row-data">
-                {{ cellData }}
+            <div v-for="({date, isCurrent}, cellIndex) in rowData" :key="cellIndex" class="calendar-row-data">
+                <div v-if="isCurrent" class="current-month">{{ date }}</div>
+                <div v-else class="not-current-month">{{ date }}</div>
             </div>
         </div>
     </div>
@@ -128,14 +129,14 @@ export default {
 .calendar-column {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
     width: 90vw;
+    border: 1px solid black;
     margin-left: auto;
     margin-right: auto;
 }
 
 .calendar-column-text {
-    border: 1px solid red;
+    border: 1px solid black;
     width: 100%;
     text-align: center;
 }
@@ -145,14 +146,22 @@ export default {
     justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
-    /* border: 1px solid blue; */
     width: 90vw;
     height: 100px;
 }
 
 .calendar-row-data {
-    border: 1px solid green;
+    border: 1px solid black;
     width: 100%;
+}
+
+.current-month {
+    font-size: 1.2em;
+}
+
+.not-current-month {
+    color: #00000052;
+    font-size: 1.2em;
 }
     
 </style>
