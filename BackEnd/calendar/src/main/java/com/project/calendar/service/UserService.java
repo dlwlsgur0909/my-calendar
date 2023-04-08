@@ -60,7 +60,7 @@ public class UserService {
 
         UserEntity user = userRepository.findByUserUsername(username);
 
-        if(user == null) {
+        if(user == null || !requestDTO.getUserUsername().equals(user.getUserUsername())) {
             // user does not exist exception
             throw new CustomException(ExceptionEnum.USER_NOT_EXIST);
         }

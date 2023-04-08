@@ -1,34 +1,28 @@
 <template>
     <div class="login-form">
-        <h2>Welcome to My Calendar</h2>
+        <h2>LOGIN</h2>
         <div class="login-input">
             <div id="login-username">
                 Username: 
-                <input type="text" placeholder="아이디를 입력하세요" size="20" v-model="this.username">
+                <input type="text" placeholder="아이디" size="15" v-model="this.username">
             </div>
             <div id="login-password">
                 Password:
-                <input type="text" placeholder="비밀번호를 입력하세요" size="20" v-model="this.password">
+                <input type="password" placeholder="비밀번호" size="17" v-model="this.password">
             </div>
             <div>
                 <button id="login-button" @click="onClickLogin">로그인</button>
             </div>
             <div class="login-form-buttons">
-                <router-link to="/signup"><span id="join-button">회원가입</span></router-link> |
-                <span id="find-id-pw-button">아이디/비밀번호 찾기</span>
+                <router-link to="/signup"><span id="join-button">회원가입</span></router-link> 
+                <!-- | <span id="find-id-pw-button">아이디/비밀번호 찾기</span> -->
             </div>
         </div>
     </div>
 </template>
+
 <script>
-
-import { fetchLogin } from '../api/api.js';
-
-
 export default {
-    
-
-
     data() {
         return {
             username: '',
@@ -41,22 +35,19 @@ export default {
                 alert("아이디와 비밀번호를 다시 확인해주세요")
                 return;
             }
-
-
             const user = {
-                username: this.username,
-                password: this.password,
+                userUsername: this.username,
+                userPassword: this.password,
             };
 
-            // 로그인 로직 필요
-            fetchLogin(user)
-            .then()
-            .then()
+
+            this.$store.dispatch('FETCH_LOGIN', user);
         }
     }
     
 }
 </script>
+
 <style scoped>
 
 input {
@@ -84,18 +75,30 @@ input {
 }
 
 .login-input {
-    width: 60%;
+    width: 250px;
     height: 40%;
 }
 
 #login-username,
 #login-password {
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
     height: 18%;
     background: white;
     padding-left: 5px;
     border-radius: 5px;
+    line-height: 200%;
+}
+
+#login-username input,
+#login-password input {
+    margin-left: 15px;
+    text-align: center;
+}
+
+#login-username input::placeholder,
+#login-password input::placeholder {
+    text-align: center;
+    color: rgb(252, 110, 110);
 }
 
 #login-password {
