@@ -17,20 +17,32 @@
         </div>
         <div v-for="(rowData, rowIndex) in calendar" class="calendar-row" :key="rowIndex">
             <div v-for="({date, isCurrent}, cellIndex) in rowData" :key="cellIndex" class="calendar-row-data">
-                <div v-if="isCurrent" class="current-month">{{ date }}</div>
-                <div v-else class="not-current-month">{{ date }}</div>
+                <div class="calendar-date" @click="onClickDate(date)">
+                    <div v-if="isCurrent" class="current-month">{{ date }}</div>
+                    <div v-else class="not-current-month">{{ date }}</div>
+                </div>
             </div>
         </div>
+        <todo-modal></todo-modal>
     </div>
 </template>
 
 <script>
+/* esling-disabled */
+
+import TodoModal from '../components/TodoModal.vue';
+
 export default {
-    
+    components: {
+        TodoModal
+    },
     data() {
         return {
             currentYear: this.$store.state.year,
-            currentMonth: this.$store.state.month,            
+            currentMonth: this.$store.state.month,
+            selectedYear: '',
+            selectedMonth: '',
+            selectedDate: '',            
         }
     },
     computed: {
@@ -89,6 +101,9 @@ export default {
                 month: thisMonth
             }
             this.$store.dispatch('CREATE_CALENDAR', dateInfo);
+        },
+        onClickDate(date) {
+            alert(date);
         }
     }
     
@@ -153,6 +168,10 @@ export default {
 .calendar-row-data {
     border: 1px solid black;
     width: 100%;
+}
+
+.calendar-date {
+    height: 100%;
 }
 
 .current-month {
