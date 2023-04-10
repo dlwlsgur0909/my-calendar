@@ -43,8 +43,8 @@ public class ScheduleEntity {
     @Column(name = "schedule_update")
     private LocalDate scheduleUpdate;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private String userId;
+//    @Column(name = "user_id", insertable = false, updatable = false)
+//    private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

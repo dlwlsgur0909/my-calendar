@@ -28,7 +28,7 @@ class ScheduleRepositoryTest {
         UserEntity user = userRepository.findByUserUsername("test");
 
         ScheduleEntity entity = ScheduleEntity.builder()
-                .scheduleTitle("할일 2번")
+                .scheduleTitle("할일 3번")
                 .scheduleYear("2023")
                 .scheduleMonth("4")
                 .scheduleDate("10")
@@ -40,7 +40,7 @@ class ScheduleRepositoryTest {
         ScheduleEntity savedSchedule = scheduleRepository.save(entity);
 
         // then
-        Assertions.assertThat(savedSchedule.getScheduleTitle()).isEqualTo("할일 2번");
+        Assertions.assertThat(savedSchedule.getScheduleTitle()).isEqualTo("할일 3번");
 
     }
 
@@ -58,7 +58,7 @@ class ScheduleRepositoryTest {
         List<ScheduleEntity> scheduleList = scheduleRepository.findScheduleList(username, year, month, date);
 
         // then
-        org.junit.jupiter.api.Assertions.assertEquals(2, scheduleList.size());
+        org.junit.jupiter.api.Assertions.assertEquals(3, scheduleList.size());
         org.junit.jupiter.api.Assertions.assertEquals("할일 2번", scheduleList.get(1).getScheduleTitle());
 
     }
