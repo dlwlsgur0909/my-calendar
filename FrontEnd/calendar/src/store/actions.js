@@ -93,6 +93,8 @@ export default {
                 afterEnd: afterEnd
             },
             currentObj: {
+                currentYear: year,
+                currentMonth: month,
                 firstDate: 1,
                 lastDate: lastDate,
                 isFirstZero: isFirstZero

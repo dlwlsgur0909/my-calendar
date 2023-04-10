@@ -3,6 +3,9 @@ package com.project.calendar.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDate;
 
 @Getter @ToString
 @AllArgsConstructor
@@ -17,14 +20,28 @@ public class ScheduleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scheduleId;
 
+    @Column(name = "schedule_year")
+    private String scheduleYear;
+
+    @Column(name = "schedule_month")
+    private String scheduleMonth;
+
+    @Column(name = "schedule_date")
+    private String scheduleDate;
+
     @Column(name = "schedule_title")
     private String scheduleTitle;
 
     @Column(name = "schedule_done")
     private String scheduleDone;
 
+    @CreationTimestamp
     @Column(name = "schedule_create")
-    private String scheduleCreate;
+    private LocalDate scheduleCreate;
+
+    @CreationTimestamp
+    @Column(name = "schedule_update")
+    private LocalDate scheduleUpdate;
 
     @Column(name = "user_id", insertable = false, updatable = false)
     private String userId;

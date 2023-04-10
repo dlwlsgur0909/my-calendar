@@ -15,6 +15,9 @@ export const store = createStore({
         month: new Date().getMonth(),
         date: new Date().getDate(),
         day: new Date().getDay(),
+        nowYear: new Date().getFullYear(),
+        nowMonth: new Date().getMonth(),
+        nowDate: new Date().getDate(),
         // firstDay: new Date(new Date().getFullYear(), new Date().getMonth()).getDay(),
         // firstDate: new Date(new Date().getFullYear(), new Date().getMonth()).getDate(),
         // start: new Date(new Date.setDate())
