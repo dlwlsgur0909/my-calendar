@@ -12,10 +12,14 @@ export default {
             for(let i=0; i<7; i++) {
 
                 const data = {
+                    year: '',
+                    month: '',
                     date: '',
                     isCurrent: '',
                 };
 
+                data.year = obj.currentObj.currentYear,
+                data.month = obj.currentObj.currentMonth,
                 data.date = obj.currentObj.firstDate;
                 data.isCurrent = true;
 
@@ -27,18 +31,24 @@ export default {
             for(let i=0; i<7; i++) {
 
                 const data = {
+                    year: '',
+                    month: '',
                     date: '',
                     isCurrent: '',
                 };
 
                 if(obj.beforeObj.beforeStart <= obj.beforeObj.beforeEnd) {
 
+                    data.year = obj.beforeObj.beforeYear;
+                    data.month = obj.beforeObj.beforeMonth;
                     data.date = obj.beforeObj.beforeStart;
                     data.isCurrent = false;
 
                     obj.beforeObj.beforeStart++;
                 }else {
 
+                    data.year = obj.currentObj.currentYear,
+                    data.month = obj.currentObj.currentMonth,
                     data.date = obj.currentObj.firstDate;
                     data.isCurrent = true;
 
@@ -59,16 +69,22 @@ export default {
             for(let j=0; j<7; j++) {
 
                 const data = {
+                    year: '',
+                    month: '',
                     date: '',
                     isCurrent: ''
                 };
 
                 if(obj.currentObj.firstDate <= obj.currentObj.lastDate) {
+                    data.year = obj.currentObj.currentYear,
+                    data.month = obj.currentObj.currentMonth,
                     data.date = obj.currentObj.firstDate
                     data.isCurrent = true;
                     obj.currentObj.firstDate++;
                 }else {
                     if(obj.afterObj.afterStart <= obj.afterObj.afterEnd) {
+                        data.year = obj.afterObj.afterYear;
+                        data.month = obj.afterObj.afterMonth;
                         data.date = obj.afterObj.afterStart;
                         data.isCurrent = false;
                         obj.afterObj.afterStart++;

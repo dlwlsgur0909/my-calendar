@@ -16,14 +16,21 @@
             <div class="calendar-column-text">토</div>
         </div>
         <div v-for="(rowData, rowIndex) in calendar" class="calendar-row" :key="rowIndex">
-            <div v-for="({date, isCurrent}, cellIndex) in rowData" :key="cellIndex" class="calendar-row-data">
-                <div class="calendar-date" @click="onClickDate(date)">
-                    <div v-if="isCurrent" class="current-month">{{ date }}</div>
-                    <div v-else class="not-current-month">{{ date }}</div>
+            <div v-for="(data, cellIndex) in rowData" :key="cellIndex" class="calendar-row-data">
+                <div class="calendar-date" @click="onClickDate(data)">
+                    <div v-if="data.isCurrent" class="current-month">{{ data.date }}</div>
+                    <div v-else class="not-current-month">{{ data.date }}</div>
                 </div>
             </div>
         </div>
-        <todo-modal></todo-modal>
+        <div id="block" @click="onClickBlock"></div>
+        <todo-modal 
+            id="todo-modal" 
+            :selectedDate = "selectedDate"
+            :selectedMonth = "selectedMonth"
+            :selectedYear = "selectedYear"
+        >
+        </todo-modal>
     </div>
 </template>
 
@@ -31,6 +38,9 @@
 /* esling-disabled */
 
 import TodoModal from '../components/TodoModal.vue';
+
+
+
 
 export default {
     components: {
@@ -102,8 +112,20 @@ export default {
             }
             this.$store.dispatch('CREATE_CALENDAR', dateInfo);
         },
-        onClickDate(date) {
-            alert(date);
+        onClickDate(data) {
+            this.selectedYear = data.year;
+            this.selectedMonth = data.month;
+            this.selectedDate = data.date;
+            const block = document.querySelector('#block');
+            const todoModal = document.querySelector('#todo-modal');
+            block.style.display = 'block';
+            todoModal.style.display = 'block';
+        },
+        onClickBlock() {
+            const block = document.querySelector('#block');
+            const todoModal = document.querySelector('#todo-modal');
+            block.style.display = 'none';
+            todoModal.style.display = 'none';
         }
     }
     
@@ -111,6 +133,20 @@ export default {
 </script>
 
 <style>
+
+#block {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.178);
+}
+
+#todo-modal {
+    display: none;
+}
 
 .calendar-header {
     text-align: center;
