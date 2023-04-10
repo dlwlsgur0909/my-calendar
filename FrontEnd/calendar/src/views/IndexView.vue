@@ -18,8 +18,13 @@
         <div v-for="(rowData, rowIndex) in calendar" class="calendar-row" :key="rowIndex">
             <div v-for="(data, cellIndex) in rowData" :key="cellIndex" class="calendar-row-data">
                 <div class="calendar-date" @click="onClickDate(data)">
-                    <div v-if="data.isCurrent" class="current-month">{{ data.date }}</div>
-                    <div v-else class="not-current-month">{{ data.date }}</div>
+                    <div v-if="data.isCurrent" class="current-month">
+                        <div v-if="data.year === nowYear && data.month === nowMonth && data.date === nowDate" class="calendar-today">{{ data.date }}</div>
+                        <div v-else>{{ data.date }}</div>
+                    </div>
+                    <div v-else class="not-current-month">
+                        {{ data.date }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,8 +45,6 @@
 import TodoModal from '../components/TodoModal.vue';
 
 
-
-
 export default {
     components: {
         TodoModal
@@ -59,6 +62,15 @@ export default {
         calendar() {
             return this.$store.state.calendar;
         },
+        nowYear() {
+            return this.$store.state.nowYear;
+        },
+        nowMonth() {
+            return this.$store.state.nowMonth;
+        },
+        nowDate() {
+            return this.$store.state.nowDate;
+        }
     },
     methods: {
         onClickPrevMonth() {
@@ -204,6 +216,12 @@ export default {
 .calendar-row-data {
     border: 1px solid black;
     width: 100%;
+}
+
+.calendar-today {
+    background: rgb(54, 230, 157);
+    color: #fff;
+
 }
 
 .calendar-date {
