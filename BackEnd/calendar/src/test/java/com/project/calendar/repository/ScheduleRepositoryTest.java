@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
@@ -50,16 +51,16 @@ class ScheduleRepositoryTest {
 
         // given
         String username = "test";
-        String year = "2023";
-        String month = "4";
-        String date = "10";
+        String date = "2023-04-20";
+        LocalDate fullDate = LocalDate.parse(date);
+
 
         // when
-        List<ScheduleEntity> scheduleList = scheduleRepository.findScheduleList(username, year, month, date);
+        List<ScheduleEntity> scheduleList = scheduleRepository.findScheduleDetail(username, fullDate);
 
         // then
-        org.junit.jupiter.api.Assertions.assertEquals(3, scheduleList.size());
-        org.junit.jupiter.api.Assertions.assertEquals("할일 2번", scheduleList.get(1).getScheduleTitle());
+        org.junit.jupiter.api.Assertions.assertEquals(1, scheduleList.size());
+        org.junit.jupiter.api.Assertions.assertEquals("목요일이네?", scheduleList.get(0).getScheduleTitle());
 
     }
 

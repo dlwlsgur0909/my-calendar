@@ -5,15 +5,27 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> {
 
-    @Query("select s from ScheduleEntity s where s.user.userUsername=:username and s.scheduleYear=:year and s.scheduleMonth=:month and s.scheduleDate=:date" )
+
+    @Query("select s from ScheduleEntity s where s.user.userUsername=:username and s.scheduleFullDate=:fullDate")
+    List<ScheduleEntity> findScheduleDetail(@Param("username") String username,
+                                            @Param("fullDate") LocalDate fullDate
+                                            );
+
+    @Query("select s from ScheduleEntity s where s.user.userUsername=:username and s.scheduleFullDate BETWEEN :begin AND :end")
     List<ScheduleEntity> findScheduleList(@Param("username") String username,
-                                          @Param("year") String year,
-                                          @Param("month") String month,
-                                          @Param("date") String date
+                                          @Param("begin") LocalDate begin,
+                                          @Param("end") LocalDate end
                                           );
+
+
+    @Query("select count(*) from ScheduleEntity s where s.user.userUsername=:username and s.scheduleFullDate=:fullDate")
+    int countSchedule(@Param("username") String username,
+                      @Param("fullDate") LocalDate fullDate
+                      );
 
 }

@@ -35,6 +35,9 @@ public class ScheduleEntity {
     @Column(name = "schedule_done")
     private String scheduleDone;
 
+    @Column(name = "schedule_full_date")
+    private LocalDate scheduleFullDate;
+
     @CreationTimestamp
     @Column(name = "schedule_create")
     private LocalDate scheduleCreate;

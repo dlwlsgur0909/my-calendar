@@ -10,12 +10,19 @@ import lombok.*;
 public class ScheduleListRequestDTO {
 
     @NotBlank
-    private String year;
+    private String beginYear;
 
     @NotBlank
-    private String month;
+    private String beginMonth;
 
     @NotBlank
-    private String date;
+    private String beginDate;
+
+    @NotBlank
+    private String endYear;
+
+    @NotBlank String endMonth;
+
+    @NotBlank String endDate;
 
 }
