@@ -11,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,9 +25,10 @@ public class ScheduleController {
 
 
 
-    @GetMapping("/schedule")
-    public ResponseEntity<?> listSchedule(final String username,
-                                          @Validated @RequestBody ScheduleListRequestDTO requestDTO) {
+    @PostMapping("/schedule/{username}")
+    public ResponseEntity<?> listSchedule(@Validated @RequestBody ScheduleListRequestDTO requestDTO,
+                                          @PathVariable("username") String username) {
+
 
         List<ScheduleListResponseDTO> responseDTO = scheduleService.listSchedule(username, requestDTO);
 
