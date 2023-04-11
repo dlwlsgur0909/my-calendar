@@ -32,7 +32,6 @@ public class ScheduleController {
     public ResponseEntity<?> listSchedule(final String username,
                                           @Validated @RequestBody ScheduleListRequestDTO requestDTO) {
 
-
         List<ScheduleListResponseDTO> responseDTO = scheduleService.listSchedule(username, requestDTO);
 
         return ResponseEntity
