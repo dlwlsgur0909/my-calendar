@@ -102,6 +102,10 @@ export default {
 
     SET_YEAR(state, year) {
         state.year = year;
+    },
+
+    SET_SCHEDULE(state, data) {
+        state.schedule = data;
     }
 
 

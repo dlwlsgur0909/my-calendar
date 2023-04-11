@@ -25,6 +25,11 @@
                     <div v-else class="not-current-month">
                         {{ data.date }}
                     </div>
+                    <div v-for="{ id, year, month, date, title } in schedule" :key="id">
+                            <template v-if="year == data.year && month == (data.month+1) && date == data.date" >
+                                {{ title }}
+                            </template>    
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +48,6 @@
 /* esling-disabled */
 
 import TodoModal from '../components/TodoModal.vue';
-
 
 export default {
     components: {
@@ -70,6 +74,9 @@ export default {
         },
         nowDate() {
             return this.$store.state.nowDate;
+        },
+        schedule() {
+            return this.$store.state.schedule;
         }
     },
     methods: {

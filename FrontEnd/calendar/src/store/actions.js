@@ -2,7 +2,8 @@
 
 import {
     fetchSignUp,
-    fetchLogin
+    fetchLogin,
+    fetchSchedule
 } from '../api/api.js';
 
 import router from '../router/router.js';
@@ -41,6 +42,10 @@ export default {
         .catch(error => console.log(error))
     },
 
+    FETCH_SCHEDULE(context, data) {
+
+    },
+
     CHANGE_MONTH(context, month) {
         context.commit('SET_MONTH', month);
     },
@@ -73,11 +78,24 @@ export default {
         let afterStart = 1;
         let afterEnd = 42;
 
+
+
+        const data = { 
+            beginYear: beforeYear,
+            beginMonth: beforeMonth+1,
+            beginDate: beforeStart,
+            endYear: afterYear+1,
+            endMonth: afterMonth,
+        }
+
+
         if(firstDay === 0) {
             afterEnd -= lastDate;
         }else {
             afterEnd -= (lastDate + (beforeEnd - beforeStart) + 1);
         }
+
+        data.endDate = afterEnd;
 
         const obj = {
             beforeObj: {
@@ -101,8 +119,24 @@ export default {
             }
         };
 
+        fetchSchedule(data)
+        .then(res => res.json())
+        .then(res => {
+            if(res.errorMessage) {
+                console.log(res);
+                console.log(res.errorMessage);
+                return;
+            }else {
+                context.commit('SET_SCHEDULE', res);
+            }
+        })
+
 
         context.commit('SET_CALENDAR', obj);
+
+
+
+        // this.FETCH_SCHEDULE(data);
     }
 
     // 해당 년, 월의 총 일 수를 구하는 함수
