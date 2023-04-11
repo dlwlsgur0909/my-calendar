@@ -1,12 +1,11 @@
 package com.project.calendar.service;
 
 import com.project.calendar.dto.request.ScheduleCreateRequestDTO;
+import com.project.calendar.dto.request.ScheduleDetailRequestDTO;
 import com.project.calendar.dto.request.ScheduleListRequestDTO;
+import com.project.calendar.dto.response.ScheduleDetailResponseDTO;
 import com.project.calendar.dto.response.ScheduleListResponseDTO;
-import com.project.calendar.entity.ScheduleEntity;
-import com.project.calendar.entity.UserEntity;
 import com.project.calendar.exception.CustomException;
-import com.project.calendar.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,20 +31,44 @@ class ScheduleServiceTest {
                 .year("2023")
                 .month("4")
                 .date("13")
-                .title("목요일이네?")
+                .title("4번 일정")
                 .build();
 
         String username = "test";
 
         // when
-        List<ScheduleListResponseDTO> list = scheduleService.createSchedule(username, requestDTO);
+        List<ScheduleDetailResponseDTO> detail = scheduleService.createSchedule(username, requestDTO);
 
         // then
-        Assertions.assertEquals(1, list.size());
-        Assertions.assertEquals("목요일이네?", list.get(0).getTitle());
+        Assertions.assertEquals(4, detail.size());
+        Assertions.assertEquals("4번 일정", detail.get(3).getTitle());
 
     }
 
+    @Test
+    @DisplayName("특정 날짜의 일정 목록을 반환해야 한다")
+    void detailScheduleTest() {
+        // given
+
+        String username = "test";
+
+        ScheduleDetailRequestDTO requestDTO = ScheduleDetailRequestDTO.builder()
+                .year("2023")
+                .month("4")
+                .date("20")
+                .build();
+
+
+        // when
+        List<ScheduleDetailResponseDTO> scheduleDetailResponseDTO = scheduleService.detailSchedule(username, requestDTO);
+
+        // then
+        for (ScheduleDetailResponseDTO detailResponseDTO : scheduleDetailResponseDTO) {
+            System.out.println(detailResponseDTO.getTitle());
+        }
+        Assertions.assertEquals(3, scheduleDetailResponseDTO.size());
+
+    }
     @Test
     @DisplayName("특정 일정의 id값으로 일정 삭제를 하면 해당 일자의 일정 목록이 반환되어야 한다")
     void deleteScheduleTest() {
@@ -53,18 +76,14 @@ class ScheduleServiceTest {
         // given
         String username = "test";
         Long scheduleId = 5L;
-        ScheduleListRequestDTO listRequestDTO = ScheduleListRequestDTO.builder()
-                .year("2023")
-                .date("4")
-                .date("13")
-                .build();
 
         // when
-        List<ScheduleListResponseDTO> responseDTOList = scheduleService.deleteSchedule(username, listRequestDTO, scheduleId);
+        List<ScheduleDetailResponseDTO> responseDTOList = scheduleService.deleteSchedule(username, scheduleId);
 
         // then
-        Assertions.assertEquals(0, responseDTOList.size());
+        Assertions.assertEquals(3, responseDTOList.size());
     }
+
 
     @Test
     @DisplayName("없는 id 값으로 일정을 삭제하면 CustomException이 발생해야 한다")
@@ -73,18 +92,45 @@ class ScheduleServiceTest {
         // given
         String username = "test";
         Long scheduleId = 0L;
-        ScheduleListRequestDTO listRequestDTO = ScheduleListRequestDTO.builder()
-                .year("2023")
-                .date("4")
-                .date("13")
-                .build();
 
         // when
 
         // then
         Assertions.assertThrows(CustomException.class, () -> {
-            List<ScheduleListResponseDTO> responseDTOList = scheduleService.deleteSchedule(username, listRequestDTO, scheduleId);
+            List<ScheduleDetailResponseDTO> responseDTOList = scheduleService.deleteSchedule(username, scheduleId);
         });
+    }
+
+    @Test
+    @DisplayName("회원 아이디, 시작일, 끝나는일을 입력받아 해당 기간안의 일정 목록을 반환해야 한다")
+    void findAllScheduleTest() {
+
+        // given
+        String username = "test";
+
+        ScheduleListRequestDTO requestDTO = ScheduleListRequestDTO.builder()
+                .beginYear("2023")
+                .beginMonth("4")
+                .beginDate("1")
+                .endYear("2024")
+                .endMonth("1")
+                .endDate("1")
+                .build();
+
+
+        // when
+        List<ScheduleListResponseDTO> responseDTOList = scheduleService.listSchedule(username, requestDTO);
+
+        // then
+        for (ScheduleListResponseDTO scheduleListResponseDTO : responseDTOList) {
+            System.out.println("scheduleListResponseDTO = " + scheduleListResponseDTO);
+        }
+
+        Assertions.assertEquals(6, responseDTOList.size());
+
+
+
+
     }
 
 }
