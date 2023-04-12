@@ -39,8 +39,8 @@ public class ScheduleController {
 
     }
 
-    @GetMapping("/schedule/detail/")
-    public ResponseEntity<?> detailSchedule(final String username,
+    @PostMapping("/schedule/detail/{username}")
+    public ResponseEntity<?> detailSchedule(@PathVariable("username") String username,
                                             @Validated @RequestBody ScheduleDetailRequestDTO requestDTO) {
 
         List<ScheduleDetailResponseDTO> responseDTO = scheduleService.detailSchedule(username, requestDTO);
