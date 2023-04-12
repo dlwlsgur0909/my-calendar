@@ -123,8 +123,7 @@ export default {
         .then(res => res.json())
         .then(res => {
             if(res.errorMessage) {
-                console.log(res);
-                console.log(res.errorMessage);
+                alert(res.errorMessage);
                 return;
             }else {
                 context.commit('SET_SCHEDULE', res);

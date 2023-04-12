@@ -30,8 +30,8 @@ class ScheduleServiceTest {
         ScheduleCreateRequestDTO requestDTO = ScheduleCreateRequestDTO.builder()
                 .year("2023")
                 .month("4")
-                .date("13")
-                .title("4번 일정")
+                .date("12")
+                .title("Vue 교육 1일차")
                 .build();
 
         String username = "test";
@@ -40,8 +40,8 @@ class ScheduleServiceTest {
         List<ScheduleDetailResponseDTO> detail = scheduleService.createSchedule(username, requestDTO);
 
         // then
-        Assertions.assertEquals(4, detail.size());
-        Assertions.assertEquals("4번 일정", detail.get(3).getTitle());
+        Assertions.assertEquals(1, detail.size());
+        Assertions.assertEquals("Vue 교육 1일차", detail.get(0).getTitle());
 
     }
 
