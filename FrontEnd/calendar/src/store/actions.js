@@ -3,7 +3,8 @@
 import {
     fetchSignUp,
     fetchLogin,
-    fetchSchedule
+    fetchSchedule,
+    fetchScheduleDetail,
 } from '../api/api.js';
 
 import router from '../router/router.js';
@@ -40,10 +41,6 @@ export default {
             }
         })
         .catch(error => console.log(error))
-    },
-
-    FETCH_SCHEDULE(context, data) {
-
     },
 
     CHANGE_MONTH(context, month) {
@@ -133,9 +130,18 @@ export default {
 
         context.commit('SET_CALENDAR', obj);
 
-
-
-        // this.FETCH_SCHEDULE(data);
+    },
+    FETCH_SCHEDULE_DETAIL(context, data) {
+        fetchScheduleDetail(data)
+        .then(res => res.json())
+        .then(res => {
+            if(res.errorMessage) {
+                alert(res.errorMessage);
+                return;
+            }else {
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
+        })
     }
 
     // 해당 년, 월의 총 일 수를 구하는 함수

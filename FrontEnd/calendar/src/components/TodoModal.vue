@@ -6,7 +6,7 @@
           <input type="text" size="30" placeholder="추가 일정을 입력하세요"> 
           <button class="todo-input-button">+</button>
         </div>
-        <todo-list :data="info"></todo-list>
+        <todo-list></todo-list>
       </div>  
     </div>
 </template>
@@ -34,17 +34,7 @@ export default {
     },
   },
   computed: {
-    info() {
 
-      const data = {
-        username: window.sessionStorage.getItem('username'),
-        year: this.selectedYear,
-        month: this.selectedMonth,
-        date: this.selectedDate,
-      }
-
-      return data;
-    }
   }
     
 }

@@ -139,6 +139,16 @@ export default {
             const todoModal = document.querySelector('#todo-modal');
             block.style.display = 'block';
             todoModal.style.display = 'block';
+
+
+            const selectedData = {
+                year: this.selectedYear,
+                month: this.selectedMonth,
+                date: this.selectedDate,
+            }
+            
+            this.$store.dispatch('FETCH_SCHEDULE_DETAIL', selectedData);
+
         },
         onClickBlock() {
             const block = document.querySelector('#block');

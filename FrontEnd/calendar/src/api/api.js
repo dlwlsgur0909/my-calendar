@@ -46,6 +46,23 @@ function fetchSchedule(data) {
     })
 }
 
+// 알정 상세 
+function fetchScheduleDetail(data) {
+    const username = window.sessionStorage.getItem('username');
+
+    return fetch(`${config.baseUrl}/schedule/detail/${username}`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            year: data.year,
+            month: data.month,
+            date: data.date,
+        })
+    })
+}
+
 
 
 
@@ -53,4 +70,5 @@ export {
     fetchSignUp,
     fetchLogin,
     fetchSchedule,
+    fetchScheduleDetail,
 }

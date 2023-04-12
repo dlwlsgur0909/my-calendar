@@ -11,6 +11,7 @@ export const store = createStore({
         name: window.sessionStorage.getItem('name'),
         regdate: window.sessionStorage.getItem('regdate'),
         schedule:[],
+        scheduleDetail: [],
         calendar: [],
         year: new Date().getFullYear(),
         month: new Date().getMonth(),

@@ -1,21 +1,21 @@
 <template>
     <div>
         <ul>
-            <li>일정 1</li>
-            <li>일정 2</li>
-            <li>일정 3</li>
+            <li v-for="detail in scheduleDetail" :key="detail.id">
+                {{ detail.title }}
+            </li>
         </ul>    
     </div>
 </template>
 <script>
 export default {
 
-    props: {
-        data: {
-            type: Object,
-            required: true
+    computed: {
+        scheduleDetail() {
+            return this.$store.state.scheduleDetail;
         }
-    }
+    },
+
     
 }
 </script>
