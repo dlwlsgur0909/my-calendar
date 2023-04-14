@@ -82,7 +82,6 @@ public class ScheduleService {
 
         LocalDate fullDate = changeDateFormat(requestDTO.getYear(), requestDTO.getMonth(), requestDTO.getDate());
 
-
         List<ScheduleEntity> detail = scheduleRepository.findScheduleDetail(username, fullDate);
 
         List<ScheduleDetailResponseDTO> detailList = new ArrayList<>();

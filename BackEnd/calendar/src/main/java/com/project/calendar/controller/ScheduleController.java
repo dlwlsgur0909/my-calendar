@@ -43,6 +43,9 @@ public class ScheduleController {
     public ResponseEntity<?> detailSchedule(@PathVariable("username") String username,
                                             @Validated @RequestBody ScheduleDetailRequestDTO requestDTO) {
 
+
+
+
         List<ScheduleDetailResponseDTO> responseDTO = scheduleService.detailSchedule(username, requestDTO);
 
         return ResponseEntity
