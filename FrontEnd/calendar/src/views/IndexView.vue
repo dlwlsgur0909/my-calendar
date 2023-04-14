@@ -153,8 +153,11 @@ export default {
         onClickBlock() {
             const block = document.querySelector('#block');
             const todoModal = document.querySelector('#todo-modal');
+            const newScheduleInput = document.querySelector('#new-schedule-input');
+            
             block.style.display = 'none';
             todoModal.style.display = 'none';
+            newScheduleInput.value = ''
         }
     }
     

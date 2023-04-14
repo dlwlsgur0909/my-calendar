@@ -63,6 +63,24 @@ function fetchScheduleDetail(data) {
     })
 }
 
+// 일정 추가 
+function fetchAddSchedule(data) {
+    const username = window.sessionStorage.getItem('username');
+
+    return fetch(`${config.baseUrl}/schedule/new-detail/${username}`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: data.title,
+            year: data.year,
+            month: data.month,
+            date: data.date,
+        })
+    })
+}
+
 
 
 
@@ -71,4 +89,5 @@ export {
     fetchLogin,
     fetchSchedule,
     fetchScheduleDetail,
+    fetchAddSchedule,
 }

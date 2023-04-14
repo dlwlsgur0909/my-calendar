@@ -5,6 +5,7 @@ import {
     fetchLogin,
     fetchSchedule,
     fetchScheduleDetail,
+    fetchAddSchedule,
 } from '../api/api.js';
 
 import router from '../router/router.js';
@@ -139,7 +140,18 @@ export default {
                 alert(res.errorMessage);
                 return;
             }else {
-                console.log(res);
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
+        })
+    },
+    FETCH_ADD_SCHEDULE(context, data) {
+        fetchAddSchedule(data)
+        .then(res => res.json())
+        .then(res => {
+            if(res.errorMessage) {
+                alert(res.errorMessage);
+                return;
+            }else {
                 context.commit('SET_SCHEDULE_DETAIL', res);
             }
         })
