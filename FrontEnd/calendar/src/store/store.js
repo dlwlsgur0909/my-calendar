@@ -20,18 +20,7 @@ export const store = createStore({
         nowYear: new Date().getFullYear(),
         nowMonth: new Date().getMonth(),
         nowDate: new Date().getDate(),
-        // firstDay: new Date(new Date().getFullYear(), new Date().getMonth()).getDay(),
-        // firstDate: new Date(new Date().getFullYear(), new Date().getMonth()).getDate(),
-        // start: new Date(new Date.setDate())
-        // prevYear: new Date().getMonth() === 0 ? new Date().getFullYear()-1 : new Date().getFullYear(),
-        // prevMonth: new Date().getMonth() === 0 ? 12 : new Date().getMonth(),
-        // calender: [],
-        // today: new Date().toLocaleDateString(),
-        // year: new Date().getFullYear(),
-        // month: new Date().getMonth()+1,
-        // date: new Date().getDate(),
-        // day: new Date().getDay(),
-        // totalDays: 30,
+
 
     },
     mutations, 

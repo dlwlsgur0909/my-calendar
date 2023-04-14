@@ -139,6 +139,7 @@ export default {
                 alert(res.errorMessage);
                 return;
             }else {
+                console.log(res);
                 context.commit('SET_SCHEDULE_DETAIL', res);
             }
         })

@@ -143,7 +143,7 @@ export default {
 
             const selectedData = {
                 year: this.selectedYear,
-                month: this.selectedMonth,
+                month: this.selectedMonth+1,
                 date: this.selectedDate,
             }
             
