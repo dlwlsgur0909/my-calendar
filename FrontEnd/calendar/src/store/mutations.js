@@ -110,7 +110,7 @@ export default {
 
     SET_SCHEDULE_DETAIL(state, data) {
         state.scheduleDetail = data;
-    }
+    },
 
 
 }

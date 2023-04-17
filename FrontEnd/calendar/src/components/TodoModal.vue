@@ -6,7 +6,12 @@
           <input type="text" size="30" placeholder="추가 일정을 입력하세요" value="" id="new-schedule-input"> 
           <button class="todo-input-button" @click="onClickAddSchedule">+</button>
         </div>
-        <todo-list></todo-list>
+        <todo-list
+          :selectedDate = "selectedDate"
+          :selectedMonth = "selectedMonth"
+          :selectedYear = "selectedYear"
+        >
+        </todo-list>
       </div>  
     </div>
 </template>

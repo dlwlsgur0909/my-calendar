@@ -6,6 +6,7 @@ import {
     fetchSchedule,
     fetchScheduleDetail,
     fetchAddSchedule,
+    fetchChangeDone,
 } from '../api/api.js';
 
 export default {
@@ -160,6 +161,18 @@ export default {
             }
 
             context.dispatch('CREATE_CALENDAR', dateInfo)
+        })
+    },
+    CHANGE_DONE(context, data) {
+        fetchChangeDone(data)
+        .then(res => res.json())
+        .then(() => {
+            if(res.errorMessage) {
+                alert(res.errorMessage);
+                return;
+            }else {
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
         })
     }
 }

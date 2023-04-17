@@ -81,6 +81,21 @@ function fetchAddSchedule(data) {
     })
 }
 
+// 일정 완료 여부 변경
+function fetchChangeDone(data) {
+    const username = window.sessionStorage.getItem('username');
+    
+    return fetch(`${config.baseUrl}/schedule/detail/${username}/${data.id}`, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+
+        })
+    })
+}
+
 
 
 
@@ -90,4 +105,5 @@ export {
     fetchSchedule,
     fetchScheduleDetail,
     fetchAddSchedule,
+    fetchChangeDone,
 }
