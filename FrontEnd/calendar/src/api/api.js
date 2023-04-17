@@ -46,6 +46,56 @@ function fetchSchedule(data) {
     })
 }
 
+// 알정 상세 
+function fetchScheduleDetail(data) {
+    const username = window.sessionStorage.getItem('username');
+
+    return fetch(`${config.baseUrl}/schedule/detail/${username}`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            year: data.year,
+            month: data.month,
+            date: data.date,
+        })
+    })
+}
+
+// 일정 추가 
+function fetchAddSchedule(data) {
+    const username = window.sessionStorage.getItem('username');
+
+    return fetch(`${config.baseUrl}/schedule/new-detail/${username}`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: data.title,
+            year: data.year,
+            month: data.month,
+            date: data.date,
+        })
+    })
+}
+
+// 일정 완료 여부 변경
+function fetchChangeDone(data) {
+    const username = window.sessionStorage.getItem('username');
+    
+    return fetch(`${config.baseUrl}/schedule/detail/${username}/${data.id}`, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+
+        })
+    })
+}
+
 
 
 
@@ -53,4 +103,7 @@ export {
     fetchSignUp,
     fetchLogin,
     fetchSchedule,
+    fetchScheduleDetail,
+    fetchAddSchedule,
+    fetchChangeDone,
 }

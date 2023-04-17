@@ -3,10 +3,15 @@
       <div class="todo-modal">
         <h2 class="todo-modal-header">{{ selectedYear }}년 {{ selectedMonth+1 }}월 {{ selectedDate }}일 일정</h2>
         <div class="todo-input-box">
-          <input type="text" size="30" placeholder="추가 일정을 입력하세요"> 
-          <button class="todo-input-button">+</button>
+          <input type="text" size="30" placeholder="추가 일정을 입력하세요" value="" id="new-schedule-input"> 
+          <button class="todo-input-button" @click="onClickAddSchedule">+</button>
         </div>
-        <todo-list :data="info"></todo-list>
+        <todo-list
+          :selectedDate = "selectedDate"
+          :selectedMonth = "selectedMonth"
+          :selectedYear = "selectedYear"
+        >
+        </todo-list>
       </div>  
     </div>
 </template>
@@ -33,18 +38,33 @@ export default {
       required: true
     },
   },
-  computed: {
-    info() {
+  methods: {
+    onClickAddSchedule() {
 
-      const data = {
-        username: window.sessionStorage.getItem('username'),
-        year: this.selectedYear,
-        month: this.selectedMonth,
-        date: this.selectedDate,
+      const newScheduleTitle = document.querySelector('#new-schedule-input');
+
+      if(newScheduleTitle.value.trim() === '') {
+        alert('일정을 입력해주세요');
+        return;
       }
 
-      return data;
-    }
+
+      const data = {
+        title: newScheduleTitle.value,
+        year: this.selectedYear,
+        month: this.selectedMonth+1,
+        date: this.selectedDate,
+        currentYear: this.$store.state.year,
+        currentMonth: this.$store.state.month,
+      };
+
+      this.$store.dispatch('FETCH_ADD_SCHEDULE', data)
+      
+      newScheduleTitle.value = '';
+
+    },
+
+
   }
     
 }
@@ -56,7 +76,6 @@ export default {
     position: absolute;
     top: calc(50vh - 30vh);
     left: calc(50vw - 15vw);
-    border: 1px solid red;
     background: #fff;
     width: 30vw;
     height: 60vh;

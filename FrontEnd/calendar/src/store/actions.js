@@ -3,10 +3,11 @@
 import {
     fetchSignUp,
     fetchLogin,
-    fetchSchedule
+    fetchSchedule,
+    fetchScheduleDetail,
+    fetchAddSchedule,
+    fetchChangeDone,
 } from '../api/api.js';
-
-import router from '../router/router.js';
 
 export default {
     
@@ -40,10 +41,6 @@ export default {
             }
         })
         .catch(error => console.log(error))
-    },
-
-    FETCH_SCHEDULE(context, data) {
-
     },
 
     CHANGE_MONTH(context, month) {
@@ -133,15 +130,49 @@ export default {
 
         context.commit('SET_CALENDAR', obj);
 
+    },
+    FETCH_SCHEDULE_DETAIL(context, data) {
+        fetchScheduleDetail(data)
+        .then(res => res.json())
+        .then(res => {
+            if(res.errorMessage) {
+                alert(res.errorMessage);
+                return;
+            }else {
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
+        })
+    },
+    FETCH_ADD_SCHEDULE(context, data) {
+        fetchAddSchedule(data)
+        .then(res => res.json())
+        .then(res => {
+            if(res.errorMessage) {
+                alert(res.errorMessage);
+                return;
+            }else {
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
+        })
+        .then(() => {
+            const dateInfo = {
+                year: data.currentYear,
+                month: data.currentMonth,
+            }
 
-
-        // this.FETCH_SCHEDULE(data);
+            context.dispatch('CREATE_CALENDAR', dateInfo)
+        })
+    },
+    CHANGE_DONE(context, data) {
+        fetchChangeDone(data)
+        .then(res => res.json())
+        .then(() => {
+            if(res.errorMessage) {
+                alert(res.errorMessage);
+                return;
+            }else {
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
+        })
     }
-
-    // 해당 년, 월의 총 일 수를 구하는 함수
-    // CalculateTotalDays(context, year, month) {
-    //     totalDays = new Date(year, month, 0).getDate();
-    //     context.commit('SET_TOTALDAYS', totalDays);
-    // }
-
 }
