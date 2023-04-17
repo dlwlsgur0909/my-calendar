@@ -8,8 +8,6 @@ import {
     fetchAddSchedule,
 } from '../api/api.js';
 
-import router from '../router/router.js';
-
 export default {
     
     FETCH_SIGNUP(context, user) {
@@ -155,12 +153,13 @@ export default {
                 context.commit('SET_SCHEDULE_DETAIL', res);
             }
         })
+        .then(() => {
+            const dateInfo = {
+                year: data.currentYear,
+                month: data.currentMonth,
+            }
+
+            context.dispatch('CREATE_CALENDAR', dateInfo)
+        })
     }
-
-    // 해당 년, 월의 총 일 수를 구하는 함수
-    // CalculateTotalDays(context, year, month) {
-    //     totalDays = new Date(year, month, 0).getDate();
-    //     context.commit('SET_TOTALDAYS', totalDays);
-    // }
-
 }

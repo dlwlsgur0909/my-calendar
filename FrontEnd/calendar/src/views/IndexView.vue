@@ -26,9 +26,9 @@
                         {{ data.date }}
                     </div>
                     <div v-for="{ id, year, month, date, title } in schedule" :key="id">
-                            <template v-if="year == data.year && month == (data.month+1) && date == data.date" >
-                                {{ title }}
-                            </template>    
+                        <template v-if="year == data.year && month == (data.month+1) && date == data.date" >
+                            {{ title }}
+                        </template>    
                     </div>
                 </div>
             </div>
@@ -57,9 +57,9 @@ export default {
         return {
             currentYear: this.$store.state.year,
             currentMonth: this.$store.state.month,
-            selectedYear: '',
-            selectedMonth: '',
-            selectedDate: '',            
+            selectedYear: 0,
+            selectedMonth: 0,
+            selectedDate: 0,            
         }
     },
     computed: {

@@ -43,26 +43,23 @@ export default {
         return;
       }
 
+
       const data = {
         title: newScheduleTitle.value,
         year: this.selectedYear,
         month: this.selectedMonth+1,
-        date: this.selectedDate
+        date: this.selectedDate,
+        currentYear: this.$store.state.year,
+        currentMonth: this.$store.state.month,
       };
 
-      this.$store.dispatch('FETCH_ADD_SCHEDULE', data);
+      this.$store.dispatch('FETCH_ADD_SCHEDULE', data)
+      
       newScheduleTitle.value = '';
 
-      const dateInfo = {
-        year: this.$store.state.year,
-        month: this.$store.state.month
-      }
-
-      this.$store.dispatch('CREATE_CALENDAR', dateInfo);
+    },
 
 
-
-    }
   }
     
 }
@@ -74,7 +71,6 @@ export default {
     position: absolute;
     top: calc(50vh - 30vh);
     left: calc(50vw - 15vw);
-    border: 1px solid red;
     background: #fff;
     width: 30vw;
     height: 60vh;

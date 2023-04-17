@@ -105,7 +105,6 @@ export default {
     },
 
     SET_SCHEDULE(state, data) {
-        console.log(data);
         state.schedule = data;
     },
 
