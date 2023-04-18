@@ -73,7 +73,7 @@ public class ScheduleController {
 
         return ResponseEntity
                 .ok()
-                .body(requestDTO);
+                .body(responseDTO);
     }
 
 

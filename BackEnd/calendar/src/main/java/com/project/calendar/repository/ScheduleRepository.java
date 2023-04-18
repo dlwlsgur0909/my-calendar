@@ -28,9 +28,5 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
                       @Param("fullDate") LocalDate fullDate
                       );
 
-    @Query("update ScheduleEntity s set s.scheduleDone=:done where s.scheduleId=:id")
-    int changeDone(@Param("done") String done,
-                   @Param("id") Long id
-                   );
 
 }

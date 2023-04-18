@@ -180,7 +180,7 @@ public class ScheduleService {
                 .date(requestDTO.getDate())
                 .build();
 
-        // 여기부터 수정
+
         return detailSchedule(username, detailRequestDTO);
     }
 
