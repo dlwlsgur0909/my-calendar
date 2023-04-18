@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -157,7 +156,7 @@ public class ScheduleService {
     }
 
     // 일정 완료 여부 변경
-    public List<ScheduleDetailResponseDTO> changeDone(final String username, final ChangeDoneRequestDTO requestDTO) {
+    public List<ScheduleDetailResponseDTO> changeDone(final String username, final Long id, final ChangeDoneRequestDTO requestDTO) {
 
         UserEntity user = userRepository.findByUserUsername(username);
 
@@ -169,19 +168,18 @@ public class ScheduleService {
             throw new CustomException(ExceptionEnum.INSUFFICIENT_INFORMATION);
         }
 
-        ScheduleEntity entity = scheduleRepository.findById(requestDTO.getId()).orElseThrow(() -> {
+        ScheduleEntity entity = scheduleRepository.findById(id).orElseThrow(() -> {
             throw new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST);
         });
 
         entity.changeDone(requestDTO.getDone());
-        scheduleRepository.save(entity);
+        ScheduleEntity updatedEntity = scheduleRepository.save(entity);
 
         ScheduleDetailRequestDTO detailRequestDTO = ScheduleDetailRequestDTO.builder()
-                .year(requestDTO.getYear())
-                .month(requestDTO.getMonth())
-                .date(requestDTO.getDate())
+                .year(updatedEntity.getScheduleYear())
+                .month(updatedEntity.getScheduleMonth())
+                .date(updatedEntity.getScheduleDate())
                 .build();
-
 
         return detailSchedule(username, detailRequestDTO);
     }

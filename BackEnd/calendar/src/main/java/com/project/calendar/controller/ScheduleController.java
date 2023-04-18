@@ -9,9 +9,7 @@ import com.project.calendar.dto.response.ScheduleListResponseDTO;
 import com.project.calendar.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,7 +84,7 @@ public class ScheduleController {
                                         @PathVariable("id") Long id,
                                         @Validated @RequestBody ChangeDoneRequestDTO requestDTO) {
 
-        List<ScheduleDetailResponseDTO> responseDTO = scheduleService.changeDone(username, requestDTO);
+        List<ScheduleDetailResponseDTO> responseDTO = scheduleService.changeDone(username, id, requestDTO);
 
         return ResponseEntity
                 .ok()
