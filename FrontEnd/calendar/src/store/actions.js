@@ -166,7 +166,7 @@ export default {
     CHANGE_DONE(context, data) {
         fetchChangeDone(data)
         .then(res => res.json())
-        .then(() => {
+        .then(res => {
             if(res.errorMessage) {
                 alert(res.errorMessage);
                 return;

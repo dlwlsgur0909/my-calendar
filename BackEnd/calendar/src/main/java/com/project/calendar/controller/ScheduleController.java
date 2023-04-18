@@ -1,5 +1,6 @@
 package com.project.calendar.controller;
 
+import com.project.calendar.dto.request.ChangeDoneRequestDTO;
 import com.project.calendar.dto.request.ScheduleCreateRequestDTO;
 import com.project.calendar.dto.request.ScheduleDetailRequestDTO;
 import com.project.calendar.dto.request.ScheduleListRequestDTO;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +58,18 @@ public class ScheduleController {
                                             @Validated @RequestBody ScheduleCreateRequestDTO requestDTO) {
 
         List<ScheduleDetailResponseDTO> responseDTO = scheduleService.createSchedule(username, requestDTO);
+
+        return ResponseEntity
+                .ok()
+                .body(responseDTO);
+    }
+
+    @PatchMapping("/schedule/detail/{username}/{id}")
+    public ResponseEntity<?> changeDone(@PathVariable("username") String username,
+                                        @PathVariable("id") Long id,
+                                        @Validated @RequestBody ChangeDoneRequestDTO requestDTO) {
+
+        List<ScheduleDetailResponseDTO> responseDTO = scheduleService.changeDone(username, requestDTO);
 
         return ResponseEntity
                 .ok()

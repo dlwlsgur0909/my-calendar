@@ -1,5 +1,6 @@
 package com.project.calendar.service;
 
+import com.project.calendar.dto.request.ChangeDoneRequestDTO;
 import com.project.calendar.dto.request.ScheduleCreateRequestDTO;
 import com.project.calendar.dto.request.ScheduleDetailRequestDTO;
 import com.project.calendar.dto.request.ScheduleListRequestDTO;
@@ -151,6 +152,36 @@ public class ScheduleService {
 
         scheduleRepository.deleteById(scheduleId);
         return detailSchedule(username, requestDTO);
+    }
+
+    // 일정 완료 여부 변경
+    public List<ScheduleDetailResponseDTO> changeDone(final String username, final ChangeDoneRequestDTO requestDTO) {
+
+        UserEntity user = userRepository.findByUserUsername(username);
+
+        if(user == null) {
+            throw new CustomException(ExceptionEnum.USER_NOT_EXIST);
+        }
+
+        if(requestDTO == null) {
+            throw new CustomException(ExceptionEnum.INSUFFICIENT_INFORMATION);
+        }
+
+        ScheduleEntity entity = scheduleRepository.findById(requestDTO.getId()).orElseThrow(() -> {
+            throw new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST);
+        });
+
+        entity.changeDone(requestDTO.getDone());
+        scheduleRepository.save(entity);
+
+        ScheduleDetailRequestDTO detailRequestDTO = ScheduleDetailRequestDTO.builder()
+                .year(requestDTO.getYear())
+                .month(requestDTO.getMonth())
+                .date(requestDTO.getDate())
+                .build();
+
+
+        return detailSchedule(username, detailRequestDTO);
     }
 
 
