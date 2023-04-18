@@ -141,7 +141,9 @@ public class ScheduleService {
     // 일정 삭제
     public List<ScheduleDetailResponseDTO> deleteSchedule(final String username, final Long scheduleId) {
 
-        ScheduleEntity entity = scheduleRepository.findById(scheduleId).orElseThrow(() -> new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST));
+        ScheduleEntity entity = scheduleRepository.findById(scheduleId).orElseThrow(() ->{
+                 throw new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST);
+        });
 
         ScheduleDetailRequestDTO requestDTO = ScheduleDetailRequestDTO.builder()
                 .year(entity.getScheduleYear())
@@ -183,6 +185,7 @@ public class ScheduleService {
 
         return detailSchedule(username, detailRequestDTO);
     }
+
 
 
 
