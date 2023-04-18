@@ -54,5 +54,9 @@ public class ScheduleEntity {
     private UserEntity user;
 
 
+    public void changeDone(String done) {
+        this.scheduleDone = done;
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.project.calendar.exception;
 
 import org.apache.coyote.Response;
+import org.hibernate.query.IllegalSelectQueryException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,7 +14,8 @@ public class ExceptionAdvice {
 
 
     @ExceptionHandler({
-            HttpServerErrorException.InternalServerError.class
+            HttpServerErrorException.InternalServerError.class,
+            IllegalSelectQueryException.class
     })
     public ResponseEntity<?> internalServerErrorHandler(Exception e) {
         return ResponseEntity
