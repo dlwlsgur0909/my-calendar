@@ -203,7 +203,7 @@ export default {
         .then(res => res.json())
         .then(res => {
             if(res.errorMessage) {
-                alert(errorMessage);
+                alert(res.errorMessage);
                 return;
             }else {
                 context.commit('SET_SCHEDULE_DETAIL', res);
