@@ -1,9 +1,6 @@
 package com.project.calendar.service;
 
-import com.project.calendar.dto.request.ChangeDoneRequestDTO;
-import com.project.calendar.dto.request.ScheduleCreateRequestDTO;
-import com.project.calendar.dto.request.ScheduleDetailRequestDTO;
-import com.project.calendar.dto.request.ScheduleListRequestDTO;
+import com.project.calendar.dto.request.*;
 import com.project.calendar.dto.response.ScheduleDetailResponseDTO;
 import com.project.calendar.dto.response.ScheduleListResponseDTO;
 import com.project.calendar.entity.ScheduleEntity;
@@ -19,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -182,6 +180,33 @@ public class ScheduleService {
                 .build();
 
         return detailSchedule(username, detailRequestDTO);
+    }
+
+    // 일정 제목 변경
+    public List<ScheduleDetailResponseDTO> updateSchedule(final String username, final Long id, final ScheduleDetailUpdateRequestDTO requestDTO) {
+
+        UserEntity user = userRepository.findByUserUsername(username);
+
+        if(user == null) {
+            throw new CustomException(ExceptionEnum.USER_NOT_EXIST);
+        }
+
+        ScheduleEntity foundSchedule = scheduleRepository.findById(id).orElseThrow(() -> {
+            throw new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST);
+        });
+
+        foundSchedule.updateSchedule(requestDTO.getTitle());
+        ScheduleEntity updatedEntity = scheduleRepository.save(foundSchedule);
+
+        ScheduleDetailRequestDTO detailRequestDTO = ScheduleDetailRequestDTO.builder()
+                .year(updatedEntity.getScheduleYear())
+                .month(updatedEntity.getScheduleMonth())
+                .date(updatedEntity.getScheduleDate())
+                .build();
+
+        return detailSchedule(username, detailRequestDTO);
+
+
     }
 
 

@@ -1,2 +1,15 @@
-package com.project.calendar.dto.request;public class ScheduleDetailUpdateRequestDTO {
+package com.project.calendar.dto.request;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+
+@Getter @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ScheduleDetailUpdateRequestDTO {
+
+    @NotBlank
+    private String title;
+
 }

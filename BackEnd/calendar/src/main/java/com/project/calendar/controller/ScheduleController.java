@@ -1,9 +1,6 @@
 package com.project.calendar.controller;
 
-import com.project.calendar.dto.request.ChangeDoneRequestDTO;
-import com.project.calendar.dto.request.ScheduleCreateRequestDTO;
-import com.project.calendar.dto.request.ScheduleDetailRequestDTO;
-import com.project.calendar.dto.request.ScheduleListRequestDTO;
+import com.project.calendar.dto.request.*;
 import com.project.calendar.dto.response.ScheduleDetailResponseDTO;
 import com.project.calendar.dto.response.ScheduleListResponseDTO;
 import com.project.calendar.service.ScheduleService;
@@ -76,8 +73,6 @@ public class ScheduleController {
                 .body(responseDTO);
     }
 
-
-
     // 일정 완료 여부 변경
     @PatchMapping("/schedule/detail/{username}/{id}")
     public ResponseEntity<?> changeDone(@PathVariable("username") String username,
@@ -92,5 +87,17 @@ public class ScheduleController {
     }
 
 
+    // 일정 제목 변경
+    @PutMapping("/schedule/{username}/detail/{id}")
+    public ResponseEntity<?> updateSchedule(@PathVariable("username") String username,
+                                            @PathVariable("id") Long id,
+                                            @Validated @RequestBody ScheduleDetailUpdateRequestDTO requestDTO) {
+
+        List<ScheduleDetailResponseDTO> responseDTO = scheduleService.updateSchedule(username, id, requestDTO);
+
+        return ResponseEntity
+                .ok()
+                .body(responseDTO);
+    }
 
 }
