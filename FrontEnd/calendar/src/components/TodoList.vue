@@ -55,9 +55,6 @@ export default {
 
             const data = {
                 id: id,
-                year: this.selectedYear,
-                month: this.selectedMonth,
-                date: this.selectedDate,
                 currentYear: this.$store.state.year,
                 currentMonth: this.$store.state.month,
             };

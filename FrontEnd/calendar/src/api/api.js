@@ -101,18 +101,10 @@ function fetchChangeDone(data) {
 }
 
 // 일정 삭제
-function fetchDetailDelete(data) {
+function fetchDetailDelete(id) {
     const username = window.sessionStorage.getItem('username');
-    return fetch(`${config.baseUrl}/schedule/detail/${username}/${data.id}`, {
+    return fetch(`${config.baseUrl}/schedule/detail/${username}/${id}`, {
         method: 'DELETE',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: {
-            year: data.year,
-            month: data.month,
-            date: data.date,
-        }
     })
 }
 

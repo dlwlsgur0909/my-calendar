@@ -178,7 +178,7 @@ export default {
 
     },
     DETAIL_DELETE(context, data) {
-        fetchDetailDelete(data)
+        fetchDetailDelete(data.id)
         .then(res => res.json())
         .then(res => {
             if(res.errorMessage) {
