@@ -50,7 +50,7 @@ function fetchSchedule(data) {
 function fetchScheduleDetail(data) {
     const username = window.sessionStorage.getItem('username');
 
-    return fetch(`${config.baseUrl}/schedule/detail/${username}`, {
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -67,7 +67,7 @@ function fetchScheduleDetail(data) {
 function fetchAddSchedule(data) {
     const username = window.sessionStorage.getItem('username');
 
-    return fetch(`${config.baseUrl}/schedule/new-detail/${username}`, {
+    return fetch(`${config.baseUrl}/schedule/${username}/new-detail/`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -85,7 +85,7 @@ function fetchAddSchedule(data) {
 function fetchChangeDone(data) {
     const username = window.sessionStorage.getItem('username');
     
-    return fetch(`${config.baseUrl}/schedule/detail/${username}/${data.id}`, {
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/${data.id}`, {
         method: 'PATCH',
         headers: {
             'content-type': 'application/json',
@@ -99,7 +99,7 @@ function fetchChangeDone(data) {
 // 일정 삭제
 function fetchDetailDelete(id) {
     const username = window.sessionStorage.getItem('username');
-    return fetch(`${config.baseUrl}/schedule/detail/${username}/${id}`, {
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/${id}`, {
         method: 'DELETE',
     })
 }
