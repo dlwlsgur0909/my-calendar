@@ -1,9 +1,9 @@
 <template>
     <div class="header">
-        <div v-if="loginStatus">
-            <router-link to="/index">Index</router-link> |  
-            <router-link to="/users">My Profile</router-link> |
-            <router-link to="/logout">Logout</router-link>
+        <div v-if="loginStatus" class="after-login-header">
+            <router-link to="/index">INDEX</router-link>   
+            <router-link to="/users">PROFILE</router-link> 
+            <router-link to="/logout">LOGOUT</router-link>
         </div>
         <div class="before-login-header" v-else>
             <h1 @click="onClickLogo">Welcom to My Calendar</h1>
@@ -28,12 +28,11 @@ export default {
 }
 </script>
 
-<style scopde>
+<style scoped>
 .header {
     box-sizing: border-box;
     height: 10vh;
     display: flex;
-    border: 1px solid black;
     justify-content: center;
     align-items: center;
     background: rgb(54, 230, 157);
@@ -46,6 +45,26 @@ export default {
 
 .before-login-header:hover {
     color: rgba(255, 255, 255, 0.74);
+}
+
+.after-login-header {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-right: 5%;
+}
+
+a:hover {
+    color: #00000085;
 }
     
 </style>
