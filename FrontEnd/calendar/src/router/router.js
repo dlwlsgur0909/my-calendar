@@ -2,6 +2,7 @@ import { createWebHistory, createRouter} from 'vue-router';
 import IndexView from '../views/IndexView.vue';
 import LoginView from '../views/LoginView.vue';
 import SignUpView from '../views/SignUpView.vue';
+import ProfileView from '../views/ProfileView.vue';
 import { store } from '../store/store.js';
 
 
@@ -27,6 +28,12 @@ const routes = [
         name: 'index',
         component: IndexView,
         beforeEnter: (to, from, next) => {
+
+            if(!window.sessionStorage.getItem('name')) {
+                alert('로그인이 필요한 서비스입니다.');
+                window.location.href = "/login";
+                return;
+            }
             
             // 오늘 날짜 정보
             const dateInfo = {
@@ -50,7 +57,8 @@ const routes = [
     },
     {
         path: '/users',
-        name: 'users'
+        name: 'users',
+        component: ProfileView,
     }
 ]
 
