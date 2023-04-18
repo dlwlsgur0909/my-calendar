@@ -50,7 +50,7 @@ function fetchSchedule(data) {
 function fetchScheduleDetail(data) {
     const username = window.sessionStorage.getItem('username');
 
-    return fetch(`${config.baseUrl}/schedule/detail/${username}`, {
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -67,7 +67,7 @@ function fetchScheduleDetail(data) {
 function fetchAddSchedule(data) {
     const username = window.sessionStorage.getItem('username');
 
-    return fetch(`${config.baseUrl}/schedule/new-detail/${username}`, {
+    return fetch(`${config.baseUrl}/schedule/${username}/new-detail/`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -85,19 +85,39 @@ function fetchAddSchedule(data) {
 function fetchChangeDone(data) {
     const username = window.sessionStorage.getItem('username');
     
-    return fetch(`${config.baseUrl}/schedule/detail/${username}/${data.id}`, {
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/${data.id}`, {
         method: 'PATCH',
         headers: {
             'content-type': 'application/json',
         },
         body: JSON.stringify({
-            id: data.id,
             done: data.done,
-            year: data.year,
-            month: data.month,
-            date: data.date,
         })
     })
+}
+
+// 일정 삭제
+function fetchDetailDelete(id) {
+    const username = window.sessionStorage.getItem('username');
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/${id}`, {
+        method: 'DELETE',
+    })
+}
+
+// 일정 제목 변경
+function fetchDetailUpdate(data) {
+    const username = window.sessionStorage.getItem('username');
+    
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/${data.id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: data.title,
+        })
+    })
+
 }
 
 
@@ -110,4 +130,6 @@ export {
     fetchScheduleDetail,
     fetchAddSchedule,
     fetchChangeDone,
+    fetchDetailDelete,
+    fetchDetailUpdate,
 }

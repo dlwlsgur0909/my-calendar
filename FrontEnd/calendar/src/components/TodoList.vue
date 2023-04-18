@@ -2,9 +2,11 @@
     <div>
         <div v-if="scheduleDetail.length > 0">
             <div class="detail-list" v-for="detail in scheduleDetail" :key="detail.id">
-                <span>{{ detail.title }}</span>
-                <div class="detail-done" v-if="detail.done === 'T'" @click="onClickDone(detail.done, detail.id)"></div>
-                <div class="detail-not-done" v-else @click="onClickDone(detail.done, detail.id)"></div>
+                <input type="text" class="detail-title" v-model="detail.title">
+                <input type="checkbox" class="detail-done" v-if="detail.done === 'T'" @click="onClickDone(detail.done, detail.id)" checked="true">
+                <input type="checkbox" class="detail-not-done" v-else @click="onClickDone(detail.done, detail.id)">
+                <span class="detail-delete-button" @click="onClickDeleteButton(detail.id)">⛔</span>
+                <span class="detail-update-button" @click="onClickUpdateButton(detail.id, detail.title)">🔄️</span>
             </div>
         </div>    
         <p v-else class="empty-schedule-detail">아직 등록된 일정이 없습니다</p>
@@ -39,23 +41,36 @@ export default {
             }else if(done === 'F') {
                 done = 'T';
             }
-
             
             const data = {
                 id: id,
                 done: done,
-                year: this.selectedYear,
-                month: this.selectedMonth+1,
-                date: this.selectedDate,
             };
 
             this.$store.dispatch('CHANGE_DONE', data);
-            
+        },
+        onClickDeleteButton(id) {
+
+            const data = {
+                id: id,
+                currentYear: this.$store.state.year,
+                currentMonth: this.$store.state.month,
+            };
+
+            this.$store.dispatch('DETAIL_DELETE', data);
+
+        },
+        onClickUpdateButton(id, title) {
+            const data = {
+                id: id,
+                title: title,
+                currentYear: this.$store.state.year,
+                currentMonth: this.$store.state.month,
+            };
+
+            this.$store.dispatch('DETAIL_UPDATE', data);
 
         }
-
-
-
     }
 
     
@@ -77,28 +92,45 @@ export default {
     margin-right: auto;
 }
 
+.detail-title {
+    width: 70%;
+}
+
 .detail-done {
-    display: inline-block;
     position: absolute;
-    right: 6%;
-    background: rgb(54, 230, 157);
-    width: 25px;
-    height: 25px;
-    border-radius: 15px;
+    right: 4%;
+    margin-top: -0.5%;
+    font-size: 1.2rem;
     cursor: pointer;
+    width: 5%;
+    height: 5%;
 }
 
 .detail-not-done {
-    display: inline-block;
     position: absolute;
-    right: 6%;
-    background: rgba(173, 173, 173, 0.452);
-    width: 25px;
-    height: 25px;
-    border-radius: 15px;
+    right: 4%;
+    margin-top: -0.5%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 5%;
+    height: 5%;
+}
+
+.detail-delete-button {
+    position: absolute;
+    right: 12%;
+    margin-top: -0.5%;
+    font-size: 1.2rem;
     cursor: pointer;
 }
 
+.detail-update-button {
+    position: absolute;
+    right: 20%;
+    margin-top: -0.5%;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
 
     
 </style>

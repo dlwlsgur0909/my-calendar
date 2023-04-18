@@ -7,6 +7,8 @@ import {
     fetchScheduleDetail,
     fetchAddSchedule,
     fetchChangeDone,
+    fetchDetailDelete,
+    fetchDetailUpdate,
 } from '../api/api.js';
 
 export default {
@@ -160,7 +162,7 @@ export default {
                 month: data.currentMonth,
             }
 
-            context.dispatch('CREATE_CALENDAR', dateInfo)
+            context.dispatch('CREATE_CALENDAR', dateInfo);
         })
     },
     CHANGE_DONE(context, data) {
@@ -173,6 +175,47 @@ export default {
             }else {
                 context.commit('SET_SCHEDULE_DETAIL', res);
             }
+        })
+
+    },
+    DETAIL_DELETE(context, data) {
+        fetchDetailDelete(data.id)
+        .then(res => res.json())
+        .then(res => {
+            if(res.errorMessage) {
+                alert(res.errorMessage)
+                return;
+            }else {
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
+        })
+        .then(() => {
+            const dateInfo = {
+                year: data.currentYear,
+                month: data.currentMonth,
+            }
+
+            context.dispatch('CREATE_CALENDAR', dateInfo);
+        })
+    },
+    DETAIL_UPDATE(context, data) {
+        fetchDetailUpdate(data)
+        .then(res => res.json())
+        .then(res => {
+            if(res.errorMessage) {
+                alert(res.errorMessage);
+                return;
+            }else {
+                context.commit('SET_SCHEDULE_DETAIL', res);
+            }
+        })
+        .then(() => {
+            const dateInfo = {
+                year: data.currentYear,
+                month: data.currentMonth,
+            };
+
+            context.dispatch('CREATE_CALENDAR', dateInfo);
         })
     }
 }

@@ -1,9 +1,6 @@
 package com.project.calendar.service;
 
-import com.project.calendar.dto.request.ChangeDoneRequestDTO;
-import com.project.calendar.dto.request.ScheduleCreateRequestDTO;
-import com.project.calendar.dto.request.ScheduleDetailRequestDTO;
-import com.project.calendar.dto.request.ScheduleListRequestDTO;
+import com.project.calendar.dto.request.*;
 import com.project.calendar.dto.response.ScheduleDetailResponseDTO;
 import com.project.calendar.dto.response.ScheduleListResponseDTO;
 import com.project.calendar.entity.ScheduleEntity;
@@ -141,7 +138,9 @@ public class ScheduleService {
     // 일정 삭제
     public List<ScheduleDetailResponseDTO> deleteSchedule(final String username, final Long scheduleId) {
 
-        ScheduleEntity entity = scheduleRepository.findById(scheduleId).orElseThrow(() -> new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST));
+        ScheduleEntity entity = scheduleRepository.findById(scheduleId).orElseThrow(() ->{
+                 throw new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST);
+        });
 
         ScheduleDetailRequestDTO requestDTO = ScheduleDetailRequestDTO.builder()
                 .year(entity.getScheduleYear())
@@ -155,7 +154,7 @@ public class ScheduleService {
     }
 
     // 일정 완료 여부 변경
-    public List<ScheduleDetailResponseDTO> changeDone(final String username, final ChangeDoneRequestDTO requestDTO) {
+    public List<ScheduleDetailResponseDTO> changeDone(final String username, final Long id, final ChangeDoneRequestDTO requestDTO) {
 
         UserEntity user = userRepository.findByUserUsername(username);
 
@@ -167,22 +166,49 @@ public class ScheduleService {
             throw new CustomException(ExceptionEnum.INSUFFICIENT_INFORMATION);
         }
 
-        ScheduleEntity entity = scheduleRepository.findById(requestDTO.getId()).orElseThrow(() -> {
+        ScheduleEntity entity = scheduleRepository.findById(id).orElseThrow(() -> {
             throw new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST);
         });
 
         entity.changeDone(requestDTO.getDone());
-        scheduleRepository.save(entity);
+        ScheduleEntity updatedEntity = scheduleRepository.save(entity);
 
         ScheduleDetailRequestDTO detailRequestDTO = ScheduleDetailRequestDTO.builder()
-                .year(requestDTO.getYear())
-                .month(requestDTO.getMonth())
-                .date(requestDTO.getDate())
+                .year(updatedEntity.getScheduleYear())
+                .month(updatedEntity.getScheduleMonth())
+                .date(updatedEntity.getScheduleDate())
                 .build();
-
 
         return detailSchedule(username, detailRequestDTO);
     }
+
+    // 일정 제목 변경
+    public List<ScheduleDetailResponseDTO> updateSchedule(final String username, final Long id, final ScheduleDetailUpdateRequestDTO requestDTO) {
+
+        UserEntity user = userRepository.findByUserUsername(username);
+
+        if(user == null) {
+            throw new CustomException(ExceptionEnum.USER_NOT_EXIST);
+        }
+
+        ScheduleEntity foundSchedule = scheduleRepository.findById(id).orElseThrow(() -> {
+            throw new CustomException(ExceptionEnum.SCHEDULE_NOT_EXIST);
+        });
+
+        foundSchedule.updateSchedule(requestDTO.getTitle());
+        ScheduleEntity updatedEntity = scheduleRepository.save(foundSchedule);
+
+        ScheduleDetailRequestDTO detailRequestDTO = ScheduleDetailRequestDTO.builder()
+                .year(updatedEntity.getScheduleYear())
+                .month(updatedEntity.getScheduleMonth())
+                .date(updatedEntity.getScheduleDate())
+                .build();
+
+        return detailSchedule(username, detailRequestDTO);
+
+
+    }
+
 
 
 

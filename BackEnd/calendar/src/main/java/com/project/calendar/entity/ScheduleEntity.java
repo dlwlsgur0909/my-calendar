@@ -58,5 +58,9 @@ public class ScheduleEntity {
         this.scheduleDone = done;
     }
 
+    public void updateSchedule(String title) {
+        this.scheduleTitle = title;
+    }
+
 
 }

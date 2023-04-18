@@ -7,9 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ChangeDoneRequestDTO {
+public class ScheduleDetailUpdateRequestDTO {
 
     @NotBlank
-    private String done;
+    private String title;
 
 }
