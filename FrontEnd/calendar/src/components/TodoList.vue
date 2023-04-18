@@ -5,6 +5,7 @@
                 <span>{{ detail.title }}</span>
                 <div class="detail-done" v-if="detail.done === 'T'" @click="onClickDone(detail.done, detail.id)"></div>
                 <div class="detail-not-done" v-else @click="onClickDone(detail.done, detail.id)"></div>
+                <button class="detail-delete-button" @click="onClickDeleteButton(detail.id)">X</button>
             </div>
         </div>    
         <p v-else class="empty-schedule-detail">아직 등록된 일정이 없습니다</p>
@@ -39,7 +40,6 @@ export default {
             }else if(done === 'F') {
                 done = 'T';
             }
-
             
             const data = {
                 id: id,
@@ -50,12 +50,21 @@ export default {
             };
 
             this.$store.dispatch('CHANGE_DONE', data);
-            
+        },
+        onClickDeleteButton(id) {
 
-        }
+            const data = {
+                id: id,
+                year: this.selectedYear,
+                month: this.selectedMonth,
+                date: this.selectedDate,
+                currentYear: this.$store.state.year,
+                currentMonth: this.$store.state.month,
+            };
 
+            this.$store.dispatch('DETAIL_DELETE', data);
 
-
+        },
     }
 
     
@@ -98,6 +107,19 @@ export default {
     border-radius: 15px;
     cursor: pointer;
 }
+
+.detail-delete-button {
+    position: absolute;
+    right: 17%;
+    margin-top: 1%;
+    border: none;
+    border-radius: 5px;
+    background: rgb(252, 99, 99);
+    color: #f3efef;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 
 
     
