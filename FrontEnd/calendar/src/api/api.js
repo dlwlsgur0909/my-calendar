@@ -91,11 +91,7 @@ function fetchChangeDone(data) {
             'content-type': 'application/json',
         },
         body: JSON.stringify({
-            id: data.id,
             done: data.done,
-            year: data.year,
-            month: data.month,
-            date: data.date,
         })
     })
 }

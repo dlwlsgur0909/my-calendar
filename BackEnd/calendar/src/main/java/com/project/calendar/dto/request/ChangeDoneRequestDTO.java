@@ -8,22 +8,16 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ChangeDoneRequestDTO {
+public class ScheduleDetailUpdateRequestDTO {
 
-    @NotNull
-    private Long id;
 
+    
     @NotBlank
     private String done;
 
-    @NotBlank
-    private String year;
 
-    @NotBlank
-    private String month;
 
-    @NotBlank
-    private String date;
+
 
 
 

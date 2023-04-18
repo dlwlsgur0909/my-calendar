@@ -44,9 +44,6 @@ export default {
             const data = {
                 id: id,
                 done: done,
-                year: this.selectedYear,
-                month: this.selectedMonth+1,
-                date: this.selectedDate,
             };
 
             this.$store.dispatch('CHANGE_DONE', data);
