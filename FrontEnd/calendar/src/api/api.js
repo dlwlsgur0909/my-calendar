@@ -104,6 +104,22 @@ function fetchDetailDelete(id) {
     })
 }
 
+// 일정 제목 변경
+function fetchDetailUpdate(data) {
+    const username = window.sessionStorage.getItem('username');
+    
+    return fetch(`${config.baseUrl}/schedule/${username}/detail/${data.id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: data.title,
+        })
+    })
+
+}
+
 
 
 
@@ -114,5 +130,6 @@ export {
     fetchScheduleDetail,
     fetchAddSchedule,
     fetchChangeDone,
-    fetchDetailDelete
+    fetchDetailDelete,
+    fetchDetailUpdate,
 }
