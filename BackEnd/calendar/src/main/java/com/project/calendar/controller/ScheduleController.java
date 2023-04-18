@@ -38,7 +38,7 @@ public class ScheduleController {
     }
 
     // 일정 상세 목록
-    @PostMapping("/schedule/detail/{username}")
+    @PostMapping("/schedule/{username}/detail/")
     public ResponseEntity<?> detailSchedule(@PathVariable("username") String username,
                                             @Validated @RequestBody ScheduleDetailRequestDTO requestDTO) {
 
@@ -51,7 +51,7 @@ public class ScheduleController {
     }
 
     // 일정 추가
-    @PostMapping("/schedule/new-detail/{username}")
+    @PostMapping("/schedule/{username}/new-detail/")
     public ResponseEntity<?> createSchedule(@PathVariable("username") String username,
                                             @Validated @RequestBody ScheduleCreateRequestDTO requestDTO) {
 
@@ -64,7 +64,7 @@ public class ScheduleController {
 
 
     // 일정 삭제
-    @DeleteMapping("/schedule/detail/{username}/{id}")
+    @DeleteMapping("/schedule/{username}/detail/{id}")
     public ResponseEntity<?> deleteSchedule(@PathVariable("username") String username,
                                             @PathVariable("id") Long id) {
         List<ScheduleDetailResponseDTO> responseDTO = scheduleService.deleteSchedule(username, id);
@@ -74,7 +74,7 @@ public class ScheduleController {
     }
 
     // 일정 완료 여부 변경
-    @PatchMapping("/schedule/detail/{username}/{id}")
+    @PatchMapping("/schedule/{username}/detail/{id}")
     public ResponseEntity<?> changeDone(@PathVariable("username") String username,
                                         @PathVariable("id") Long id,
                                         @Validated @RequestBody ChangeDoneRequestDTO requestDTO) {
